@@ -11,6 +11,7 @@ mod helpers;
 mod input;
 mod llm_client;
 mod managers;
+mod ollama_setup;
 mod overlay;
 pub mod portable;
 mod settings;
@@ -638,11 +639,14 @@ pub fn run(cli_args: CliArgs) {
             commands::history::update_history_limit,
             commands::history::update_recording_retention_period,
             helpers::clamshell::is_laptop,
+            ollama_setup::check_ai_status,
+            ollama_setup::setup_local_ai,
         ])
         .events(collect_events![
             managers::history::HistoryUpdatePayload,
             managers::transcription::StreamTextEvent,
             managers::transcription::StreamPhaseEvent,
+            ollama_setup::AiSetupProgress,
         ]);
 
     #[cfg(debug_assertions)] // <- Only export on non-release builds
@@ -841,6 +845,9 @@ pub fn run(cli_args: CliArgs) {
             overlay::update_overlay_enabled_cache(
                 settings.overlay_style != settings::OverlayStyle::None,
             );
+
+            // If Poptart owns the local AI install, make sure its server is up.
+            ollama_setup::ensure_managed_server_on_launch(&app_handle);
 
             // Pre-warm GPU/accelerator enumeration on a background thread. The first
             // get_available_accelerators call enumerates ORT execution providers and
