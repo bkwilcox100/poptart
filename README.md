@@ -1,3 +1,9 @@
+
+
+<p align="center">
+<img src="assets/poptart-logo.png" width=150px height=150px />
+</p>
+
 # Poptart
 
 **A free, open source AI voice keyboard that works completely offline.**
