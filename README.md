@@ -17,6 +17,7 @@ Handy provides the excellent core: local speech-to-text (Whisper / Parakeet / mo
 - **Local AI cleanup by default** — post-processing ships enabled and pointed at a local [Ollama](https://ollama.com) instance (`qwen3:8b`). Filler words, punctuation, and self-corrections are cleaned up on-device out of the box. Any OpenAI-compatible provider still works.
 - **Command Mode with hotword** — start any dictation with *"Hey Poptart"* and the rest becomes an instruction instead of dictation. No extra hotkey, no mode switch — see [Command Mode](#command-mode) below.
 - **Screen-aware context (macOS)** — commands read the focused text field through the Accessibility API, so you don't have to select text first. *"Hey Poptart, fix the grammar"* rewrites the field you're in.
+- **Window-aware commands (macOS, beta)** — with nothing selected, commands also see the visible content of the frontmost window: the conversation you're reading, not just the box you're typing in. *"Hey Poptart, tell Mary I'll leave the coffee shop in five minutes"* reads the Messages thread and writes the reply.
 - **App-context awareness** — the `${app}` prompt variable resolves to the app you're dictating into, so the default prompt matches tone to the target: casual in Slack, formal in Mail. (macOS)
 - **Snippets** — say a trigger phrase and it expands to saved text before the AI pass. Say *"my email"*, get your address. Configured in Advanced settings alongside Handy's custom words.
 
@@ -39,6 +40,8 @@ Commands automatically pick the most specific text available, in this order:
 2. **The focused field** (macOS) — with nothing selected, the field's current text is used as context. The AI decides whether the result should *replace the field* (e.g. *"fix the typos"* rewrites it in place) or be *inserted at your cursor* (e.g. *"add a closing sentence"*).
 3. **Nothing** — in an empty field, the instruction just generates text: *"Hey Poptart, write a haiku about toast."*
 
+When there's no selection, the **visible window content** (beta) is also attached as read-only context — the window title plus the text the frontmost window exposes through Accessibility. That's what lets *"respond to the last message"* or *"tell Mary I'll be five minutes late"* work from an empty reply box: the AI can see the conversation, the sender's name, and what was just said. The window is never edited; only your reply box receives text, and nothing is sent — you always press send yourself.
+
 ### Examples
 
 | You say | With | Result |
@@ -48,12 +51,15 @@ Commands automatically pick the most specific text available, in this order:
 | "Hey Poptart, fix the grammar" | cursor in a filled field, no selection | whole field rewritten in place |
 | "Poptart, add a closing sentence thanking everyone" | cursor at the end of an email | sentence inserted at the cursor |
 | "Hey Poptart, write a short standup update" | an empty field | text generated at the cursor |
+| "Poptart, tell Mary I'll leave the coffee shop in five minutes" | empty compose box in a Messages thread | reply written from the conversation (beta) |
+| "Hey Poptart, respond to the last message in this thread" | empty input under a visible conversation | context-aware reply at the cursor (beta) |
 
 ### Good to know
 
 - Command Mode requires post-processing to be enabled (it is by default) and a reachable AI provider — with the default setup that means Ollama running locally. If the AI can't be reached, the overlay shows **"Command failed"** and nothing is pasted; a failed command never destroys your text.
 - The overlay stays visible with a working indicator while the AI generates, and your clipboard is always restored.
-- Whole-field rewrites and field context are macOS-only for now; on Windows/Linux commands work on selected text via the clipboard.
+- Whole-field rewrites, field context, and window context are macOS-only for now; on Windows/Linux commands work on selected text via the clipboard.
+- **Window awareness is beta.** It reads what apps publish through the Accessibility API — native apps (Messages, Mail, Notes) and most Electron apps work well. Apps that draw their text without exposing it to Accessibility (some games, remote desktops, canvas-rendered views) come back empty; commands there still work, just without window context. An OCR fallback for those apps hasn't been built or tested yet. Everything stays on-device — window text goes only to your local model.
 
 ## Getting started
 

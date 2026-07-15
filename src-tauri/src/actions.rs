@@ -520,17 +520,30 @@ const COMMAND_MODE_SYSTEM_PROMPT: &str = "You are a text editing engine. The use
 
 /// System prompt for Command Mode with field context (no manual selection):
 /// the LLM decides between rewriting the whole field and inserting at the cursor.
-const COMMAND_FIELD_SYSTEM_PROMPT: &str = "You are a text editing engine inside a text field. You are given the field's current content and a spoken instruction. If the instruction edits, rewrites, fixes, or transforms the existing content, return the complete new field content with action \"replace_field\". If the instruction asks for new text to add (compose, continue, answer), return only the new text with action \"insert\"; it will be typed at the cursor. Respond with only JSON: {\"action\": \"replace_field\" or \"insert\", \"text\": \"...\"} — no explanations, no markdown fences.";
+const COMMAND_FIELD_SYSTEM_PROMPT: &str = "You are a text editing engine inside a text field. You may be given the visible window content as read-only background context — use it to understand what the instruction refers to, but never echo or edit it. You are given the field's current content and a spoken instruction. If the instruction edits, rewrites, fixes, or transforms the existing content, return the complete new field content with action \"replace_field\". If the instruction asks for new text to add (compose, continue, answer, reply), return only the new text with action \"insert\"; it will be typed at the cursor. Respond with only JSON: {\"action\": \"replace_field\" or \"insert\", \"text\": \"...\"} — no explanations, no markdown fences.";
 
-/// What a spoken command operates on, in fallback order.
+/// System prompt for Command Mode with window context but nothing editable:
+/// the result is plain text typed at the cursor.
+const COMMAND_WINDOW_SYSTEM_PROMPT: &str = "You are a text generation engine. You are given the visible content of the user's current window as read-only context, and a spoken instruction. Write only the text the instruction asks for, ready to be typed at the cursor. If the window shows a conversation and the instruction asks you to reply or send a message, write only that message. Never repeat or quote the window content, no explanations, no markdown fences, no quotation marks around the output.";
+
+/// Cap on captured window text; keeps the tail (newest content) — see
+/// `utils::ax_window_text`.
+const WINDOW_TEXT_MAX_CHARS: usize = 6000;
+
+/// What a spoken command operates on, in fallback order. `window` is the
+/// frontmost window's visible text, attached whenever there is no selection.
 pub(crate) enum CommandContext {
     /// Text the user selected (AX read or clipboard capture) — output replaces it.
     Selection(String),
     /// No selection; the focused field's full text, read via AX — the LLM
     /// decides between a whole-field rewrite and an insertion.
-    Field(String),
-    /// Nothing readable — instruction-only generation, typed at the cursor.
-    Empty,
+    Field {
+        field: String,
+        window: Option<String>,
+    },
+    /// No selection, no field text — instruction (+ any window context)
+    /// generates text typed at the cursor.
+    Empty { window: Option<String> },
 }
 
 /// Gather the text the spoken command should operate on. Must run on the main
@@ -547,10 +560,28 @@ fn capture_command_context(app: &AppHandle) -> CommandContext {
         Ok(_) => {}
         Err(e) => warn!("Command Mode selection capture failed: {}", e),
     }
+    let window = crate::utils::ax_window_text(WINDOW_TEXT_MAX_CHARS);
     match ax_value {
-        Some(field) => CommandContext::Field(field),
-        None => CommandContext::Empty,
+        Some(field) => CommandContext::Field { field, window },
+        None => CommandContext::Empty { window },
     }
+}
+
+/// User message for Command Mode calls that may carry window context.
+/// The window block is fenced so a small model doesn't echo it.
+fn command_user_content(window: Option<&str>, field: Option<&str>, instruction: &str) -> String {
+    let mut s = String::new();
+    if let Some(w) = window {
+        s.push_str(&format!(
+            "Window content (read-only context):\n\"\"\"\n{}\n\"\"\"\n\n",
+            w
+        ));
+    }
+    if let Some(f) = field {
+        s.push_str(&format!("Field content:\n{}\n\n", f));
+    }
+    s.push_str(&format!("Instruction:\n{}", instruction));
+    s
 }
 
 /// Parse the LLM's field-context decision. Any parse failure degrades to
@@ -579,8 +610,8 @@ pub(crate) async fn process_command_output(
     context: CommandContext,
 ) -> ProcessedTranscription {
     let settings = get_settings(app);
-    if let CommandContext::Field(field) = &context {
-        let user_content = format!("Field content:\n{}\n\nInstruction:\n{}", field, instruction);
+    if let CommandContext::Field { field, window } = &context {
+        let user_content = command_user_content(window.as_deref(), Some(field), instruction);
         let legacy_prompt = format!("{}\n\n{}", COMMAND_FIELD_SYSTEM_PROMPT, user_content);
         let json_schema = serde_json::json!({
             "type": "object",
@@ -616,16 +647,24 @@ pub(crate) async fn process_command_output(
         };
     }
 
-    let user_content = match &context {
-        CommandContext::Selection(sel) => {
-            format!("Text:\n{}\n\nInstruction:\n{}", sel, instruction)
-        }
-        _ => format!("Instruction:\n{}", instruction),
+    let (system_prompt, user_content) = match &context {
+        CommandContext::Selection(sel) => (
+            COMMAND_MODE_SYSTEM_PROMPT,
+            format!("Text:\n{}\n\nInstruction:\n{}", sel, instruction),
+        ),
+        CommandContext::Empty { window: Some(w) } => (
+            COMMAND_WINDOW_SYSTEM_PROMPT,
+            command_user_content(Some(w), None, instruction),
+        ),
+        _ => (
+            COMMAND_MODE_SYSTEM_PROMPT,
+            command_user_content(None, None, instruction),
+        ),
     };
-    let legacy_prompt = format!("{}\n\n{}", COMMAND_MODE_SYSTEM_PROMPT, user_content);
+    let legacy_prompt = format!("{}\n\n{}", system_prompt, user_content);
     let edited = run_llm(
         &settings,
-        COMMAND_MODE_SYSTEM_PROMPT.to_string(),
+        system_prompt.to_string(),
         user_content,
         legacy_prompt,
     )
@@ -636,7 +675,7 @@ pub(crate) async fn process_command_output(
     ProcessedTranscription {
         final_text: edited.clone().unwrap_or_default(),
         post_processed_text: edited,
-        post_process_prompt: Some(COMMAND_MODE_SYSTEM_PROMPT.to_string()),
+        post_process_prompt: Some(system_prompt.to_string()),
         select_all_before_paste: false,
     }
 }
@@ -951,13 +990,13 @@ impl ShortcutAction for TranscribeAction {
                                 }) {
                                     Ok(()) => tauri::async_runtime::spawn_blocking(move || {
                                         rx.recv_timeout(std::time::Duration::from_secs(2))
-                                            .unwrap_or(CommandContext::Empty)
+                                            .unwrap_or(CommandContext::Empty { window: None })
                                     })
                                     .await
-                                    .unwrap_or(CommandContext::Empty),
+                                    .unwrap_or(CommandContext::Empty { window: None }),
                                     Err(e) => {
                                         error!("Failed to schedule context capture: {:?}", e);
-                                        CommandContext::Empty
+                                        CommandContext::Empty { window: None }
                                     }
                                 };
                                 process_command_output(&ah, instruction, context).await
@@ -1250,6 +1289,31 @@ mod tests {
         );
         assert!(replace);
         assert_eq!(text, "hi");
+    }
+
+    #[test]
+    fn command_user_content_instruction_only_matches_legacy_shape() {
+        assert_eq!(
+            super::command_user_content(None, None, "write a haiku"),
+            "Instruction:\nwrite a haiku"
+        );
+    }
+
+    #[test]
+    fn command_user_content_field_only_matches_legacy_shape() {
+        assert_eq!(
+            super::command_user_content(None, Some("draft text"), "fix it"),
+            "Field content:\ndraft text\n\nInstruction:\nfix it"
+        );
+    }
+
+    #[test]
+    fn command_user_content_window_is_fenced_and_ordered() {
+        let s = super::command_user_content(Some("thread"), Some("draft"), "reply");
+        assert_eq!(
+            s,
+            "Window content (read-only context):\n\"\"\"\nthread\n\"\"\"\n\nField content:\ndraft\n\nInstruction:\nreply"
+        );
     }
 
     #[test]
