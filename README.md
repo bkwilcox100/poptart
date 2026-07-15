@@ -56,16 +56,24 @@ When there's no selection, the **visible window content** (beta) is also attache
 
 ### Good to know
 
-- Command Mode requires post-processing to be enabled (it is by default) and a reachable AI provider — with the default setup that means Ollama running locally. If the AI can't be reached, the overlay shows **"Command failed"** and nothing is pasted; a failed command never destroys your text.
+- Command Mode requires post-processing to be enabled (it is by default) and a reachable AI. Poptart sets up and manages its own local AI engine during onboarding and restarts it at launch when needed. If the AI can't be reached, the overlay shows **"Command failed"** and nothing is pasted; a failed command never destroys your text.
 - The overlay stays visible with a working indicator while the AI generates, and your clipboard is always restored.
 - Whole-field rewrites, field context, and window context are macOS-only for now; on Windows/Linux commands work on selected text via the clipboard.
 - **Window awareness is beta.** It reads what apps publish through the Accessibility API — native apps (Messages, Mail, Notes) and most Electron apps work well. Apps that draw their text without exposing it to Accessibility (some games, remote desktops, canvas-rendered views) come back empty; commands there still work, just without window context. An OCR fallback for those apps hasn't been built or tested yet. Everything stays on-device — window text goes only to your local model.
 
+## Download
+
+**[⬇ Download the latest release](https://github.com/bkwilcox100/poptart/releases/latest)** — grab the `.dmg`, drag Poptart to Applications, and launch. That's the whole install.
+
+- Builds are for **Apple Silicon** Macs and are signed and notarized, so macOS opens them without any Gatekeeper workarounds.
+- Everything else happens in the app: onboarding walks you through permissions, picks a transcription model, and sets up the local AI (engine + model, ~5.4 GB) with one click — no Terminal, no Homebrew. Already run Ollama? Poptart detects and uses it.
+- Windows and Linux users: build from source below.
+
 ## Getting started
 
 1. Build from source (see [BUILD.md](BUILD.md)) — requires [Bun](https://bun.sh) and Rust: `bun install && bun tauri build`
-2. For local AI cleanup and Command Mode: `brew install ollama && brew services start ollama && ollama pull qwen3:8b` (or configure any OpenAI-compatible provider in Post Process settings)
-3. Launch, grant microphone + accessibility permissions, pick a transcription model
+2. Launch, grant microphone + accessibility permissions, and pick a transcription model
+3. Let onboarding's one-click **Set up local AI** handle the AI engine + model — or skip it and configure any OpenAI-compatible provider (including your own Ollama) in Post Process settings
 4. Hold `option+space` and talk — or say *"Hey Poptart, …"* to give a command
 
 ## Credits & license

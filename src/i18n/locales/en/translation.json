@@ -19,6 +19,17 @@
     "about": "About"
   },
   "onboarding": {
+    "aiSetup": {
+      "title": "Set up local AI",
+      "description": "Poptart's Command Mode and text cleanup run on a local AI model — everything stays on your Mac. One click downloads and configures it (about 5.4 GB). Already run Ollama? This step skips itself.",
+      "setupButton": "Set up local AI",
+      "retry": "Try again",
+      "skip": "Set up later — dictation works without it",
+      "stageBinary": "Downloading AI engine...",
+      "stageServer": "Starting AI engine...",
+      "stageModel": "Downloading AI model...",
+      "error": "Setup failed: {{error}}"
+    },
     "subtitle": "To get started, choose a transcription model",
     "existingModelsTitle": "Compatible Models",
     "downloadModelsTitle": "Available to Download",
