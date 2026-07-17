@@ -14,7 +14,7 @@ Poptart is a fork of [Handy](https://github.com/cjpais/Handy) by [CJ Pais](https
 
 Handy provides the excellent core: local speech-to-text (Whisper / Parakeet / more), push-to-talk, VAD, cross-platform text injection, history, and LLM post-processing. Poptart builds Wispr Flow–style features on that foundation:
 
-- **Local AI cleanup by default** — post-processing ships enabled and pointed at a local [Ollama](https://ollama.com) instance (`qwen3:8b`). Filler words, punctuation, and self-corrections are cleaned up on-device out of the box. Any OpenAI-compatible provider still works.
+- **Local AI formatting, ready out of the box** — a second shortcut (default `option+shift+space`) runs your dictation through a local [Ollama](https://ollama.com) model (`qwen3:8b`): filler words removed, punctuation fixed, and **spoken formatting commands** applied — *"number one… number two…"* becomes a numbered list, *"quote unquote X"* becomes `"X"`. Your main shortcut stays instant and raw. Any OpenAI-compatible provider works too.
 - **Command Mode with hotword** — start any dictation with *"Hey Poptart"* and the rest becomes an instruction instead of dictation. No extra hotkey, no mode switch — see [Command Mode](#command-mode) below.
 - **Screen-aware context (macOS)** — commands read the focused text field through the Accessibility API, so you don't have to select text first. *"Hey Poptart, fix the grammar"* rewrites the field you're in.
 - **Window-aware commands (macOS, beta)** — with nothing selected, commands also see the visible content of the frontmost window: the conversation you're reading, not just the box you're typing in. *"Hey Poptart, tell Mary I'll leave the coffee shop in five minutes"* reads the Messages thread and writes the reply.
@@ -22,6 +22,30 @@ Handy provides the excellent core: local speech-to-text (Whisper / Parakeet / mo
 - **Snippets** — say a trigger phrase and it expands to saved text before the AI pass. Say *"my email"*, get your address. Configured in Advanced settings alongside Handy's custom words.
 
 All of Handy's own features (custom dictionary, translation, streaming overlay, multi-model support, etc.) are unchanged.
+
+### What's Handy vs. what's Poptart
+
+| Capability | Comes from |
+| --- | --- |
+| Local speech-to-text (Whisper / Parakeet / more), push-to-talk, VAD | Handy |
+| Text injection into any app, transcription history, custom dictionary | Handy |
+| Live streaming overlay, translation, multi-model management | Handy |
+| LLM post-processing framework + the dedicated formatting shortcut | Handy |
+| One-step install: app-managed local AI engine + model | **Poptart** |
+| Hotword Command Mode (*"Hey Poptart, …"*) | **Poptart** |
+| Screen-aware + window-aware command context (Accessibility) | **Poptart** |
+| Spoken formatting commands in the formatting pass (lists, quotes) | **Poptart** |
+| App-aware prompt tone (`${app}`), Snippets | **Poptart** |
+| Signed + notarized downloadable builds | **Poptart** |
+
+## Dictation: fast or formatted
+
+Two shortcuts, one trade-off — you pick per dictation:
+
+- **`option+space` — instant.** Raw transcription typed immediately. No AI pass, no wait.
+- **`option+shift+space` — formatted.** The same dictation runs through the local AI first (a second or two): spelling, punctuation, and filler fixes, spoken punctuation (*"question mark"* → `?`), spoken formatting (*"number one…"* → numbered list), and tone matched to the app you're dictating into.
+
+One caveat: spoken directives can only be formatted if the transcription model writes them down. Parakeet (the default model) drops *"quote unquote"* as meta-speech before the AI ever sees it; Whisper-family models transcribe it literally and get the full treatment.
 
 ## Command Mode
 
@@ -74,7 +98,7 @@ When there's no selection, the **visible window content** (beta) is also attache
 1. Build from source (see [BUILD.md](BUILD.md)) — requires [Bun](https://bun.sh) and Rust: `bun install && bun tauri build`
 2. Launch, grant microphone + accessibility permissions, and pick a transcription model
 3. Let onboarding's one-click **Set up local AI** handle the AI engine + model — or skip it and configure any OpenAI-compatible provider (including your own Ollama) in Post Process settings
-4. Hold `option+space` and talk — or say *"Hey Poptart, …"* to give a command
+4. Hold `option+space` and talk (instant), hold `option+shift+space` for AI-formatted dictation — or say *"Hey Poptart, …"* to give a command
 
 ## Credits & license
 

@@ -689,11 +689,20 @@ fn default_post_process_models() -> HashMap<String, String> {
     map
 }
 
+/// Previous default cleanup prompt, kept verbatim so the migration can
+/// recognize an untouched stored copy and upgrade it in place.
+const LEGACY_IMPROVE_PROMPT: &str = "Clean this transcript:\n1. Fix spelling, capitalization, and punctuation errors\n2. Convert number words to digits (twenty-five → 25, ten percent → 10%, five dollars → $5)\n3. Replace spoken punctuation with symbols (period → ., comma → ,, question mark → ?)\n4. Remove filler words (um, uh, like as filler)\n5. Keep the language in the original version (if it was french, keep it in french for example)\n\nPreserve exact meaning and word order. Do not paraphrase or reorder content.\n\nThe user is dictating into the app: ${app}. Match tone and formatting to that app (casual for chat apps, formal for email, plain prose elsewhere).\n\nReturn only the cleaned transcript.\n\nTranscript:\n${output}";
+
+/// Current default cleanup prompt. Adds spoken formatting commands (numbered
+/// lists, quote/unquote, new line) — wording A/B-tested against qwen3:8b:
+/// the example with surrounding prose is what keeps intro sentences intact.
+const DEFAULT_IMPROVE_PROMPT: &str = "Clean this transcript:\n1. Fix spelling, capitalization, and punctuation errors\n2. Convert number words to digits (twenty-five → 25, ten percent → 10%, five dollars → $5)\n3. Replace spoken punctuation with symbols (period → ., comma → ,, question mark → ?)\n4. Interpret spoken formatting commands — they are instructions, not content, so never write them out literally. Keep all other words exactly where they are:\n   - \"number one ... number two ...\" becomes a numbered list, one item per line. Example: \"Here is the plan. Number one do X number two do Y\" becomes:\n     Here is the plan.\n     1. Do X\n     2. Do Y\n   - \"quote unquote X\" or \"quote X unquote\" wraps X in quotation marks: \"X\"\n   - \"new line\" / \"new paragraph\" become actual line breaks\n5. Remove filler words (um, uh, like as filler)\n6. Keep the language in the original version (if it was french, keep it in french for example)\n\nPreserve exact meaning. Do not paraphrase, reorder, or drop content.\n\nThe user is dictating into the app: ${app}. Match tone and formatting to that app (casual for chat apps, formal for email, plain prose elsewhere).\n\nReturn only the cleaned transcript.\n\nTranscript:\n${output}";
+
 fn default_post_process_prompts() -> Vec<LLMPrompt> {
     vec![LLMPrompt {
         id: "default_improve_transcriptions".to_string(),
         name: "Improve Transcriptions".to_string(),
-        prompt: "Clean this transcript:\n1. Fix spelling, capitalization, and punctuation errors\n2. Convert number words to digits (twenty-five → 25, ten percent → 10%, five dollars → $5)\n3. Replace spoken punctuation with symbols (period → ., comma → ,, question mark → ?)\n4. Remove filler words (um, uh, like as filler)\n5. Keep the language in the original version (if it was french, keep it in french for example)\n\nPreserve exact meaning and word order. Do not paraphrase or reorder content.\n\nThe user is dictating into the app: ${app}. Match tone and formatting to that app (casual for chat apps, formal for email, plain prose elsewhere).\n\nReturn only the cleaned transcript.\n\nTranscript:\n${output}".to_string(),
+        prompt: DEFAULT_IMPROVE_PROMPT.to_string(),
     }]
 }
 
@@ -1051,6 +1060,17 @@ fn apply_settings_migrations(
         updated = true;
     }
 
+    // Upgrade the stock cleanup prompt in place (adds spoken formatting
+    // commands). Only when the stored copy is byte-identical to the old
+    // default — a customized prompt is the user's and stays untouched.
+    for prompt in settings.post_process_prompts.iter_mut() {
+        if prompt.id == "default_improve_transcriptions" && prompt.prompt == LEGACY_IMPROVE_PROMPT
+        {
+            prompt.prompt = DEFAULT_IMPROVE_PROMPT.to_string();
+            updated = true;
+        }
+    }
+
     updated
 }
 
@@ -1225,6 +1245,33 @@ mod tests {
         assert!(!settings.bindings.contains_key("command_mode"));
         // Idempotent: a clean store reports no update.
         assert!(!apply_settings_migrations(&mut settings, &raw));
+    }
+
+    #[test]
+    fn migration_upgrades_untouched_default_prompt_only() {
+        let raw = serde_json::json!({
+            "settings_schema_version": CURRENT_SETTINGS_SCHEMA_VERSION,
+            "onboarding_completed": false,
+            "whats_new_last_seen_version": default_whats_new_last_seen_version(),
+            "overlay_style": "live"
+        });
+
+        // Untouched old default → upgraded in place.
+        let mut settings = get_default_settings();
+        settings.post_process_prompts[0].prompt = LEGACY_IMPROVE_PROMPT.to_string();
+        assert!(apply_settings_migrations(&mut settings, &raw));
+        assert_eq!(settings.post_process_prompts[0].prompt, DEFAULT_IMPROVE_PROMPT);
+        // Idempotent on the new text.
+        assert!(!apply_settings_migrations(&mut settings, &raw));
+
+        // Customized prompt → left alone.
+        let mut settings = get_default_settings();
+        settings.post_process_prompts[0].prompt = "my custom prompt ${output}".to_string();
+        assert!(!apply_settings_migrations(&mut settings, &raw));
+        assert_eq!(
+            settings.post_process_prompts[0].prompt,
+            "my custom prompt ${output}"
+        );
     }
 
     #[test]
