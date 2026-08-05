@@ -13,12 +13,24 @@
     "general": "सामान्य",
     "models": "मोडेलहरू",
     "advanced": "उन्नत",
+    "poptart": "Poptart",
     "postProcessing": "पोस्ट प्रोसेस",
     "history": "हिस्ट्री",
     "debug": "डिबग",
     "about": "बारेमा"
   },
   "onboarding": {
+    "aiSetup": {
+      "title": "लोकल AI सेटअप गर्नुहोस्",
+      "description": "Poptart को कमाण्ड मोड र टेक्स्ट क्लिनअप लोकल AI मोडेलमा चल्छ — सबै कुरा तपाईंकै Mac मा रहन्छ। एक क्लिकमै यो डाउनलोड र कन्फिगर हुन्छ (करिब 5.4 GB)। पहिले नै Ollama चलाइरहनुभएको छ? यो चरण आफैँ छोडिन्छ।",
+      "setupButton": "लोकल AI सेटअप गर्नुहोस्",
+      "retry": "फेरि प्रयास गर्नुहोस्",
+      "skip": "पछि सेटअप गर्नुहोस् — डिक्टेसन यसविना पनि चल्छ",
+      "stageBinary": "AI इन्जिन डाउनलोड गरिँदैछ...",
+      "stageServer": "AI इन्जिन सुरु गरिँदैछ...",
+      "stageModel": "AI मोडेल डाउनलोड गरिँदैछ...",
+      "error": "सेटअप असफल: {{error}}"
+    },
     "subtitle": "सुरु गर्न, एउटा ट्रान्सक्रिप्सन मोडेल छान्नुहोस्",
     "existingModelsTitle": "मिल्दा मोडेलहरू",
     "downloadModelsTitle": "डाउनलोड गर्न उपलब्ध",
@@ -157,6 +169,11 @@
   "settings": {
     "modelSettings": {
       "title": "{{model}} सेटिङहरू"
+    },
+    "poptart": {
+      "groups": {
+        "snippets": "स्निपेटहरू"
+      }
     },
     "general": {
       "title": "सामान्य",
@@ -364,6 +381,15 @@
         "add": "थप्नुहोस्",
         "remove": "{{word}} हटाउनुहोस्",
         "duplicate": "\"{{word}}\" पहिले नै छ"
+      },
+      "snippets": {
+        "title": "स्निपेटहरू",
+        "description": "ट्रिगर शब्द बोल्नुहोस् र यो कुनै पनि AI प्रशोधन हुनुअघि तपाईंले सुरक्षित गरेको टेक्स्टमा विस्तार हुन्छ। उदाहरण: \"मेरो इमेल\" भन्दा तपाईंको ठेगाना थपिन्छ।",
+        "triggerPlaceholder": "ट्रिगर",
+        "expansionPlaceholder": "यसमा विस्तार हुन्छ",
+        "add": "थप्नुहोस्",
+        "remove": "{{trigger}} हटाउनुहोस्",
+        "duplicate": "\"{{trigger}}\" पहिले नै अवस्थित छ"
       },
       "voiceActivityDetection": {
         "title": "भ्वाइस एक्टिभिटी डिटेक्सन",
@@ -659,7 +685,8 @@
   },
   "overlay": {
     "transcribing": "ट्रान्सक्राइब गरिँदैछ...",
-    "processing": "प्रशोधन गरिँदैछ..."
+    "processing": "प्रशोधन गरिँदैछ...",
+    "commandFailed": "कमाण्ड असफल — AI बाट कुनै प्रतिक्रिया छैन"
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} ले 1 सर्टकट रोकिरहेको हुन सक्छ",

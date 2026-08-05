@@ -13,12 +13,24 @@
     "general": "כללי",
     "models": "מודלים",
     "advanced": "מתקדם",
+    "poptart": "Poptart",
     "postProcessing": "עיבוד משלים",
     "history": "היסטוריה",
     "debug": "ניפוי שגיאות",
     "about": "אודות"
   },
   "onboarding": {
+    "aiSetup": {
+      "title": "הגדרת AI מקומי",
+      "description": "מצב הפקודות וניקוי הטקסט של Poptart פועלים על מודל AI מקומי — הכול נשאר על ה-Mac שלך. לחיצה אחת מורידה ומגדירה אותו (כ-5.4 ג'יגה-בייט). כבר מריץ Ollama? השלב הזה מדלג על עצמו.",
+      "setupButton": "הגדרת AI מקומי",
+      "retry": "נסה שוב",
+      "skip": "הגדרה מאוחר יותר — הכתבה עובדת גם בלי זה",
+      "stageBinary": "מוריד את מנוע ה-AI...",
+      "stageServer": "מפעיל את מנוע ה-AI...",
+      "stageModel": "מוריד את מודל ה-AI...",
+      "error": "ההגדרה נכשלה: {{error}}"
+    },
     "subtitle": "כדי להתחיל, בחר מודל תמלול",
     "existingModelsTitle": "מודלים תואמים",
     "downloadModelsTitle": "זמינים להורדה",
@@ -157,6 +169,11 @@
   "settings": {
     "modelSettings": {
       "title": "הגדרות עבור {{model}}"
+    },
+    "poptart": {
+      "groups": {
+        "snippets": "קטעי טקסט"
+      }
     },
     "general": {
       "title": "כללי",
@@ -364,6 +381,15 @@
         "add": "הוסף",
         "remove": "הסר את {{word}}",
         "duplicate": "\"{{word}}\" כבר קיימת"
+      },
+      "snippets": {
+        "title": "קטעי טקסט",
+        "description": "אמור מילת טריגר והיא תתרחב לטקסט השמור שלך לפני כל עיבוד AI. לדוגמה: אמירת \"האימייל שלי\" מוסיפה את הכתובת שלך.",
+        "triggerPlaceholder": "טריגר",
+        "expansionPlaceholder": "מתרחב אל",
+        "add": "הוסף",
+        "remove": "הסר את {{trigger}}",
+        "duplicate": "\"{{trigger}}\" כבר קיים"
       },
       "voiceActivityDetection": {
         "title": "זיהוי פעילות קולית",
@@ -656,7 +682,8 @@
   },
   "overlay": {
     "transcribing": "מתמלל...",
-    "processing": "מעבד..."
+    "processing": "מעבד...",
+    "commandFailed": "הפקודה נכשלה — אין תגובה מה-AI"
   },
   "whatsNew": {
     "title": "חדש ב-Poptart v{{version}}"

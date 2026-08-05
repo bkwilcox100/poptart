@@ -13,12 +13,24 @@
     "general": "Generelt",
     "models": "Modeller",
     "advanced": "Avanceret",
+    "poptart": "Poptart",
     "postProcessing": "Efterbehandling",
     "history": "Historik",
     "debug": "Fejlfinding",
     "about": "Om"
   },
   "onboarding": {
+    "aiSetup": {
+      "title": "Konfigurer lokal AI",
+      "description": "Poptarts kommandotilstand og tekstoprydning kører på en lokal AI-model — alt bliver på din Mac. Med ét klik downloades og konfigureres den (ca. 5,4 GB). Kører du allerede Ollama? Så springes dette trin over af sig selv.",
+      "setupButton": "Konfigurer lokal AI",
+      "retry": "Prøv igen",
+      "skip": "Konfigurer senere — diktering virker uden",
+      "stageBinary": "Downloader AI-motor...",
+      "stageServer": "Starter AI-motor...",
+      "stageModel": "Downloader AI-model...",
+      "error": "Konfiguration mislykkedes: {{error}}"
+    },
     "subtitle": "For at komme i gang skal du vælge en transskriptionsmodel",
     "existingModelsTitle": "Kompatible modeller",
     "downloadModelsTitle": "Tilgængelig til download",
@@ -157,6 +169,11 @@
   "settings": {
     "modelSettings": {
       "title": "{{model}}-indstillinger"
+    },
+    "poptart": {
+      "groups": {
+        "snippets": "Tekststumper"
+      }
     },
     "general": {
       "title": "Generelt",
@@ -364,6 +381,15 @@
         "add": "Tilføj",
         "remove": "Fjern {{word}}",
         "duplicate": "\"{{word}}\" findes allerede"
+      },
+      "snippets": {
+        "title": "Tekststumper",
+        "description": "Sig et udløserord, så udvides det til din gemte tekst, før AI behandler noget. Eksempel: siger du »min e-mail«, indsættes din adresse.",
+        "triggerPlaceholder": "Udløser",
+        "expansionPlaceholder": "Udvides til",
+        "add": "Tilføj",
+        "remove": "Fjern {{trigger}}",
+        "duplicate": "»{{trigger}}« findes allerede"
       },
       "voiceActivityDetection": {
         "title": "Stemmeaktivitetsdetektion",
@@ -659,7 +685,8 @@
   },
   "overlay": {
     "transcribing": "Transskriberer...",
-    "processing": "Behandler..."
+    "processing": "Behandler...",
+    "commandFailed": "Kommandoen mislykkedes — intet svar fra AI"
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} blokerer muligvis 1 genvej",

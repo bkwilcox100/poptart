@@ -13,12 +13,24 @@
     "general": "Allgemein",
     "models": "Modelle",
     "advanced": "Erweitert",
+    "poptart": "Poptart",
     "postProcessing": "Nachbearbeitung",
     "history": "Verlauf",
     "debug": "Debug",
     "about": "Info"
   },
   "onboarding": {
+    "aiSetup": {
+      "title": "Lokale KI einrichten",
+      "description": "Der Befehlsmodus und die Textbereinigung von Poptart laufen über ein lokales KI-Modell — alles bleibt auf deinem Mac. Ein Klick lädt es herunter und richtet es ein (etwa 5,4 GB). Läuft Ollama schon? Dann wird dieser Schritt übersprungen.",
+      "setupButton": "Lokale KI einrichten",
+      "retry": "Erneut versuchen",
+      "skip": "Später einrichten — Diktieren funktioniert auch ohne",
+      "stageBinary": "KI-Engine wird heruntergeladen...",
+      "stageServer": "KI-Engine wird gestartet...",
+      "stageModel": "KI-Modell wird heruntergeladen...",
+      "error": "Einrichtung fehlgeschlagen: {{error}}"
+    },
     "subtitle": "Wähle ein Transkriptionsmodell, um loszulegen",
     "existingModelsTitle": "Kompatible Modelle",
     "downloadModelsTitle": "Verfügbar zum Download",
@@ -157,6 +169,11 @@
   "settings": {
     "modelSettings": {
       "title": "{{model}}-Einstellungen"
+    },
+    "poptart": {
+      "groups": {
+        "snippets": "Textbausteine"
+      }
     },
     "models": {
       "title": "Transkriptionsmodelle",
@@ -364,6 +381,15 @@
         "add": "Hinzufügen",
         "remove": "{{word}} entfernen",
         "duplicate": "\"{{word}}\" existiert bereits"
+      },
+      "snippets": {
+        "title": "Textbausteine",
+        "description": "Sprich ein Auslösewort und es wird noch vor jeder KI-Verarbeitung zu deinem gespeicherten Text erweitert. Beispiel: „meine E-Mail“ fügt deine Adresse ein.",
+        "triggerPlaceholder": "Auslöser",
+        "expansionPlaceholder": "Wird erweitert zu",
+        "add": "Hinzufügen",
+        "remove": "{{trigger}} entfernen",
+        "duplicate": "„{{trigger}}“ existiert bereits"
       },
       "voiceActivityDetection": {
         "title": "Sprachaktivitätserkennung (VAD)",
@@ -656,7 +682,8 @@
   },
   "overlay": {
     "transcribing": "Transkribiere...",
-    "processing": "Verarbeite..."
+    "processing": "Verarbeite...",
+    "commandFailed": "Befehl fehlgeschlagen — keine Antwort von der KI"
   },
   "whatsNew": {
     "title": "Neu in Poptart v{{version}}"

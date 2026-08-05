@@ -13,12 +13,24 @@
     "general": "Generale",
     "models": "Modelli",
     "advanced": "Avanzate",
+    "poptart": "Poptart",
     "postProcessing": "Post-Elaborazione",
     "history": "Cronologia",
     "debug": "Debug",
     "about": "Informazioni"
   },
   "onboarding": {
+    "aiSetup": {
+      "title": "Configura l'IA locale",
+      "description": "La Modalità Comando e la pulizia del testo di Poptart funzionano con un modello di IA locale — tutto resta sul tuo Mac. Un clic lo scarica e lo configura (circa 5,4 GB). Usi già Ollama? Questo passaggio viene saltato automaticamente.",
+      "setupButton": "Configura l'IA locale",
+      "retry": "Riprova",
+      "skip": "Configura più tardi — la dettatura funziona anche senza",
+      "stageBinary": "Download del motore IA...",
+      "stageServer": "Avvio del motore IA...",
+      "stageModel": "Download del modello IA...",
+      "error": "Configurazione non riuscita: {{error}}"
+    },
     "subtitle": "Per cominciare, scegli un modello di riconoscimento vocale",
     "existingModelsTitle": "Modelli compatibili",
     "downloadModelsTitle": "Disponibile per il download",
@@ -157,6 +169,11 @@
   "settings": {
     "modelSettings": {
       "title": "Impostazioni di {{model}}"
+    },
+    "poptart": {
+      "groups": {
+        "snippets": "Frammenti"
+      }
     },
     "models": {
       "title": "Modelli di Trascrizione",
@@ -364,6 +381,15 @@
         "add": "Aggiungi",
         "remove": "Rimuovi {{word}}",
         "duplicate": "\"{{word}}\" esiste già"
+      },
+      "snippets": {
+        "title": "Frammenti",
+        "description": "Pronuncia una parola di attivazione e verrà espansa nel testo salvato prima di qualsiasi elaborazione IA. Esempio: dire «la mia email» inserisce il tuo indirizzo.",
+        "triggerPlaceholder": "Attivazione",
+        "expansionPlaceholder": "Si espande in",
+        "add": "Aggiungi",
+        "remove": "Rimuovi {{trigger}}",
+        "duplicate": "«{{trigger}}» esiste già"
       },
       "voiceActivityDetection": {
         "title": "Rilevamento dell'attività vocale",
@@ -656,7 +682,8 @@
   },
   "overlay": {
     "transcribing": "Trascrizione...",
-    "processing": "Elaborazione..."
+    "processing": "Elaborazione...",
+    "commandFailed": "Comando non riuscito — nessuna risposta dall'IA"
   },
   "whatsNew": {
     "title": "Novità in Poptart v{{version}}"
