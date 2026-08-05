@@ -75,7 +75,7 @@ const OVERLAY_TOP_OFFSET: f64 = 4.0;
 // already excludes the Dock — so this is just breathing room, not Dock
 // clearance. (Was 90 when we positioned from the raw screen bottom.)
 #[cfg(target_os = "macos")]
-const OVERLAY_BOTTOM_OFFSET: f64 = 15.0;
+const OVERLAY_BOTTOM_OFFSET: f64 = 6.0;
 
 #[cfg(any(target_os = "windows", target_os = "linux"))]
 const OVERLAY_BOTTOM_OFFSET: f64 = 40.0;
