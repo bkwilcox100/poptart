@@ -13,12 +13,24 @@
     "general": "Ogólne",
     "models": "Modele",
     "advanced": "Zaawansowane",
+    "poptart": "Poptart",
     "postProcessing": "Postproces",
     "history": "Historia",
     "debug": "Debugowanie",
     "about": "O programie"
   },
   "onboarding": {
+    "aiSetup": {
+      "title": "Skonfiguruj lokalną AI",
+      "description": "Tryb poleceń i czyszczenie tekstu w Poptart działają na lokalnym modelu AI — wszystko zostaje na Twoim Macu. Jedno kliknięcie pobiera go i konfiguruje (około 5,4 GB). Masz już uruchomioną Ollamę? Ten krok zostanie pominięty.",
+      "setupButton": "Skonfiguruj lokalną AI",
+      "retry": "Spróbuj ponownie",
+      "skip": "Skonfiguruj później — dyktowanie działa i bez tego",
+      "stageBinary": "Pobieranie silnika AI...",
+      "stageServer": "Uruchamianie silnika AI...",
+      "stageModel": "Pobieranie modelu AI...",
+      "error": "Konfiguracja nie powiodła się: {{error}}"
+    },
     "subtitle": "Aby rozpocząć, wybierz model transkrypcji",
     "existingModelsTitle": "Zgodne modele",
     "downloadModelsTitle": "Dostępne do pobrania",
@@ -157,6 +169,11 @@
   "settings": {
     "modelSettings": {
       "title": "Ustawienia {{model}}"
+    },
+    "poptart": {
+      "groups": {
+        "snippets": "Fragmenty"
+      }
     },
     "models": {
       "title": "Modele transkrypcji",
@@ -364,6 +381,15 @@
         "add": "Dodaj",
         "remove": "Usuń {{word}}",
         "duplicate": "\"{{word}}\" już istnieje"
+      },
+      "snippets": {
+        "title": "Fragmenty",
+        "description": "Wypowiedz słowo wyzwalające, a przed przetwarzaniem przez AI zostanie ono rozwinięte do zapisanego tekstu. Przykład: powiedzenie „mój e-mail” wstawia Twój adres.",
+        "triggerPlaceholder": "Wyzwalacz",
+        "expansionPlaceholder": "Rozwija się do",
+        "add": "Dodaj",
+        "remove": "Usuń {{trigger}}",
+        "duplicate": "„{{trigger}}” już istnieje"
       },
       "voiceActivityDetection": {
         "title": "Wykrywanie aktywności głosowej",
@@ -656,7 +682,8 @@
   },
   "overlay": {
     "transcribing": "Transkrypcja...",
-    "processing": "Przetwarzanie..."
+    "processing": "Przetwarzanie...",
+    "commandFailed": "Polecenie nie powiodło się — brak odpowiedzi od AI"
   },
   "whatsNew": {
     "title": "Nowości w Poptart v{{version}}"

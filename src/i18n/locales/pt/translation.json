@@ -13,12 +13,24 @@
     "general": "Geral",
     "models": "Modelos",
     "advanced": "Avançado",
+    "poptart": "Poptart",
     "postProcessing": "Pós-Processamento",
     "history": "Histórico",
     "debug": "Depuração",
     "about": "Sobre"
   },
   "onboarding": {
+    "aiSetup": {
+      "title": "Configurar IA local",
+      "description": "O Modo Comando e a limpeza de texto do Poptart rodam em um modelo de IA local — tudo fica no seu Mac. Um clique baixa e configura tudo (cerca de 5,4 GB). Já usa o Ollama? Esta etapa é ignorada automaticamente.",
+      "setupButton": "Configurar IA local",
+      "retry": "Tentar novamente",
+      "skip": "Configurar depois — o ditado funciona sem isso",
+      "stageBinary": "Baixando o motor de IA...",
+      "stageServer": "Iniciando o motor de IA...",
+      "stageModel": "Baixando o modelo de IA...",
+      "error": "Falha na configuração: {{error}}"
+    },
     "subtitle": "Para começar, escolha um modelo de transcrição",
     "existingModelsTitle": "Modelos compatíveis",
     "downloadModelsTitle": "Disponíveis para download",
@@ -157,6 +169,11 @@
   "settings": {
     "modelSettings": {
       "title": "Configurações de {{model}}"
+    },
+    "poptart": {
+      "groups": {
+        "snippets": "Trechos"
+      }
     },
     "general": {
       "title": "Geral",
@@ -364,6 +381,15 @@
         "add": "Adicionar",
         "remove": "Remover {{word}}",
         "duplicate": "\"{{word}}\" já existe"
+      },
+      "snippets": {
+        "title": "Trechos",
+        "description": "Diga uma palavra de ativação e ela se expande para o texto salvo antes de qualquer processamento de IA. Exemplo: dizer «meu e-mail» insere seu endereço.",
+        "triggerPlaceholder": "Ativação",
+        "expansionPlaceholder": "Expande para",
+        "add": "Adicionar",
+        "remove": "Remover {{trigger}}",
+        "duplicate": "«{{trigger}}» já existe"
       },
       "voiceActivityDetection": {
         "title": "Detecção de atividade de voz",
@@ -656,7 +682,8 @@
   },
   "overlay": {
     "transcribing": "Transcrevendo...",
-    "processing": "Processando..."
+    "processing": "Processando...",
+    "commandFailed": "Falha no comando — sem resposta da IA"
   },
   "whatsNew": {
     "title": "Novidades no Poptart v{{version}}"

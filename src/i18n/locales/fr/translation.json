@@ -13,12 +13,24 @@
     "general": "Général",
     "models": "Modèles",
     "advanced": "Avancé",
+    "poptart": "Poptart",
     "postProcessing": "Post-traitement",
     "history": "Historique",
     "debug": "Débogage",
     "about": "À propos"
   },
   "onboarding": {
+    "aiSetup": {
+      "title": "Configurer l'IA locale",
+      "description": "Le mode Commande et le nettoyage du texte de Poptart fonctionnent avec un modèle d'IA local — tout reste sur votre Mac. Un clic le télécharge et le configure (environ 5,4 Go). Vous utilisez déjà Ollama ? Cette étape est ignorée automatiquement.",
+      "setupButton": "Configurer l'IA locale",
+      "retry": "Réessayer",
+      "skip": "Configurer plus tard — la dictée fonctionne sans",
+      "stageBinary": "Téléchargement du moteur d'IA...",
+      "stageServer": "Démarrage du moteur d'IA...",
+      "stageModel": "Téléchargement du modèle d'IA...",
+      "error": "Échec de la configuration : {{error}}"
+    },
     "subtitle": "Pour commencer, choisissez un modèle de transcription",
     "existingModelsTitle": "Modèles compatibles",
     "downloadModelsTitle": "Disponibles au téléchargement",
@@ -157,6 +169,11 @@
   "settings": {
     "modelSettings": {
       "title": "Paramètres de {{model}}"
+    },
+    "poptart": {
+      "groups": {
+        "snippets": "Extraits"
+      }
     },
     "models": {
       "title": "Modèles de Transcription",
@@ -364,6 +381,15 @@
         "add": "Ajouter",
         "remove": "Supprimer {{word}}",
         "duplicate": "\"{{word}}\" existe déjà"
+      },
+      "snippets": {
+        "title": "Extraits",
+        "description": "Prononcez un mot déclencheur et il se transforme en votre texte enregistré avant tout traitement par l'IA. Exemple : dire « mon e-mail » insère votre adresse.",
+        "triggerPlaceholder": "Déclencheur",
+        "expansionPlaceholder": "Se transforme en",
+        "add": "Ajouter",
+        "remove": "Supprimer {{trigger}}",
+        "duplicate": "« {{trigger}} » existe déjà"
       },
       "voiceActivityDetection": {
         "title": "Détection d'activité vocale (VAD)",
@@ -656,7 +682,8 @@
   },
   "overlay": {
     "transcribing": "Transcription...",
-    "processing": "Traitement..."
+    "processing": "Traitement...",
+    "commandFailed": "Échec de la commande — aucune réponse de l'IA"
   },
   "whatsNew": {
     "title": "Nouveautés de Poptart v{{version}}"

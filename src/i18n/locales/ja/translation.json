@@ -13,12 +13,24 @@
     "general": "一般",
     "models": "モデル",
     "advanced": "詳細設定",
+    "poptart": "Poptart",
     "postProcessing": "後処理",
     "history": "履歴",
     "debug": "デバッグ",
     "about": "概要"
   },
   "onboarding": {
+    "aiSetup": {
+      "title": "ローカルAIをセットアップ",
+      "description": "PoptartのコマンドモードとテキストクリーンアップはローカルのAIモデルで動作し、すべてがMac内で完結します。ワンクリックでダウンロードと設定が完了します（約5.4GB）。すでにOllamaを実行している場合、このステップは自動的にスキップされます。",
+      "setupButton": "ローカルAIをセットアップ",
+      "retry": "再試行",
+      "skip": "後でセットアップ — 音声入力はなしでも使えます",
+      "stageBinary": "AIエンジンをダウンロード中…",
+      "stageServer": "AIエンジンを起動中…",
+      "stageModel": "AIモデルをダウンロード中…",
+      "error": "セットアップに失敗しました: {{error}}"
+    },
     "subtitle": "開始するには、文字起こしのモデルを選択してください",
     "existingModelsTitle": "互換性のあるモデル",
     "downloadModelsTitle": "ダウンロード可能",
@@ -157,6 +169,11 @@
   "settings": {
     "modelSettings": {
       "title": "{{model}} の設定"
+    },
+    "poptart": {
+      "groups": {
+        "snippets": "スニペット"
+      }
     },
     "models": {
       "title": "文字起こしのモデル",
@@ -364,6 +381,15 @@
         "add": "追加",
         "remove": "{{word}}を削除",
         "duplicate": "「{{word}}」は既に存在します"
+      },
+      "snippets": {
+        "title": "スニペット",
+        "description": "トリガーワードを話すと、AI処理の前に保存したテキストに展開されます。例:「マイメール」と言うとメールアドレスが挿入されます。",
+        "triggerPlaceholder": "トリガー",
+        "expansionPlaceholder": "展開後のテキスト",
+        "add": "追加",
+        "remove": "{{trigger}}を削除",
+        "duplicate": "「{{trigger}}」はすでに存在します"
       },
       "voiceActivityDetection": {
         "title": "音声区間検出 (VAD)",
@@ -656,7 +682,8 @@
   },
   "overlay": {
     "transcribing": "文字起こし中…",
-    "processing": "処理中…"
+    "processing": "処理中…",
+    "commandFailed": "コマンドが失敗しました — AIから応答がありません"
   },
   "whatsNew": {
     "title": "Poptart v{{version}} の新機能"

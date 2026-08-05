@@ -13,12 +13,24 @@
     "general": "Allmänt",
     "models": "Modeller",
     "advanced": "Avancerat",
+    "poptart": "Poptart",
     "postProcessing": "Efterbearbetning",
     "history": "Historik",
     "debug": "Felsökning",
     "about": "Om"
   },
   "onboarding": {
+    "aiSetup": {
+      "title": "Konfigurera lokal AI",
+      "description": "Poptarts kommandoläge och textstädning körs på en lokal AI-modell — allt stannar på din Mac. Ett klick laddar ner och konfigurerar den (cirka 5,4 GB). Kör du redan Ollama? Då hoppas det här steget över.",
+      "setupButton": "Konfigurera lokal AI",
+      "retry": "Försök igen",
+      "skip": "Konfigurera senare — diktering fungerar ändå",
+      "stageBinary": "Laddar ner AI-motorn...",
+      "stageServer": "Startar AI-motorn...",
+      "stageModel": "Laddar ner AI-modellen...",
+      "error": "Konfigurationen misslyckades: {{error}}"
+    },
     "subtitle": "För att komma igång, välj en transkriptionsmodell",
     "existingModelsTitle": "Kompatibla modeller",
     "downloadModelsTitle": "Tillgängliga för nedladdning",
@@ -157,6 +169,11 @@
   "settings": {
     "modelSettings": {
       "title": "{{model}}-inställningar"
+    },
+    "poptart": {
+      "groups": {
+        "snippets": "Textblock"
+      }
     },
     "general": {
       "title": "Allmänt",
@@ -364,6 +381,15 @@
         "add": "Lägg till",
         "remove": "Ta bort {{word}}",
         "duplicate": "\"{{word}}\" finns redan"
+      },
+      "snippets": {
+        "title": "Textblock",
+        "description": "Säg ett utlösarord så expanderas det till din sparade text innan någon AI-bearbetning sker. Exempel: att säga ”min e-post” infogar din adress.",
+        "triggerPlaceholder": "Utlösare",
+        "expansionPlaceholder": "Expanderar till",
+        "add": "Lägg till",
+        "remove": "Ta bort {{trigger}}",
+        "duplicate": "”{{trigger}}” finns redan"
       },
       "voiceActivityDetection": {
         "title": "Röstaktivitetsdetektering",
@@ -656,7 +682,8 @@
   },
   "overlay": {
     "transcribing": "Transkriberar...",
-    "processing": "Bearbetar..."
+    "processing": "Bearbetar...",
+    "commandFailed": "Kommandot misslyckades — inget svar från AI:n"
   },
   "whatsNew": {
     "title": "Nytt i Poptart v{{version}}"

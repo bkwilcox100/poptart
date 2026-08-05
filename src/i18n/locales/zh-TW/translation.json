@@ -13,12 +13,24 @@
     "general": "一般",
     "models": "模型",
     "advanced": "進階",
+    "poptart": "Poptart",
     "postProcessing": "後處理",
     "history": "歷史紀錄",
     "debug": "偵錯",
     "about": "關於"
   },
   "onboarding": {
+    "aiSetup": {
+      "title": "設定本機 AI",
+      "description": "Poptart 的指令模式與文字整理由本機 AI 模型執行 — 所有資料都留在你的 Mac 上。一鍵即可下載並完成設定（約 5.4 GB）。已經在執行 Ollama 了嗎？系統會自動略過這個步驟。",
+      "setupButton": "設定本機 AI",
+      "retry": "再試一次",
+      "skip": "稍後設定 — 沒有它也能聽寫",
+      "stageBinary": "正在下載 AI 引擎...",
+      "stageServer": "正在啟動 AI 引擎...",
+      "stageModel": "正在下載 AI 模型...",
+      "error": "設定失敗：{{error}}"
+    },
     "subtitle": "首先，請選擇一種模型",
     "existingModelsTitle": "相容的模型",
     "downloadModelsTitle": "可供下載",
@@ -157,6 +169,11 @@
   "settings": {
     "modelSettings": {
       "title": "{{model}} 設定"
+    },
+    "poptart": {
+      "groups": {
+        "snippets": "文字片段"
+      }
     },
     "general": {
       "title": "一般",
@@ -364,6 +381,15 @@
         "add": "新增",
         "remove": "刪除 {{word}}",
         "duplicate": "「{{word}}」已存在"
+      },
+      "snippets": {
+        "title": "文字片段",
+        "description": "說出觸發詞，它會在 AI 處理前展開成你儲存的文字。例如：說「我的信箱」就會插入你的地址。",
+        "triggerPlaceholder": "觸發詞",
+        "expansionPlaceholder": "展開為",
+        "add": "新增",
+        "remove": "刪除 {{trigger}}",
+        "duplicate": "「{{trigger}}」已經存在"
       },
       "voiceActivityDetection": {
         "title": "語音活動偵測",
@@ -656,7 +682,8 @@
   },
   "overlay": {
     "transcribing": "正在轉錄...",
-    "processing": "處理中..."
+    "processing": "處理中...",
+    "commandFailed": "指令失敗 — AI 沒有回應"
   },
   "whatsNew": {
     "title": "Poptart v{{version}} 新功能"

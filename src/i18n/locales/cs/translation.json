@@ -13,12 +13,24 @@
     "general": "Obecné",
     "models": "Modely",
     "advanced": "Pokročilé",
+    "poptart": "Poptart",
     "postProcessing": "Následné zpracování",
     "history": "Historie",
     "debug": "Ladění",
     "about": "O aplikaci"
   },
   "onboarding": {
+    "aiSetup": {
+      "title": "Nastavit lokální AI",
+      "description": "Režim příkazů a čištění textu v Poptartu běží na lokálním AI modelu — vše zůstává na vašem Macu. Jedním kliknutím se stáhne a nastaví (asi 5,4 GB). Už používáte Ollama? Tento krok se sám přeskočí.",
+      "setupButton": "Nastavit lokální AI",
+      "retry": "Zkusit znovu",
+      "skip": "Nastavit později — diktování funguje i bez toho",
+      "stageBinary": "Stahování AI enginu...",
+      "stageServer": "Spouštění AI enginu...",
+      "stageModel": "Stahování AI modelu...",
+      "error": "Nastavení selhalo: {{error}}"
+    },
     "subtitle": "Pro začátek vyberte model pro přepis",
     "existingModelsTitle": "Kompatibilní modely",
     "downloadModelsTitle": "Dostupné ke stažení",
@@ -157,6 +169,11 @@
   "settings": {
     "modelSettings": {
       "title": "Nastavení {{model}}"
+    },
+    "poptart": {
+      "groups": {
+        "snippets": "Úryvky"
+      }
     },
     "models": {
       "title": "Modely přepisu",
@@ -364,6 +381,15 @@
         "add": "Přidat",
         "remove": "Odebrat {{word}}",
         "duplicate": "\"{{word}}\" již existuje"
+      },
+      "snippets": {
+        "title": "Úryvky",
+        "description": "Řekněte spouštěcí slovo a rozbalí se na váš uložený text ještě před zpracováním AI. Příklad: řeknete-li „můj e-mail“, vloží se vaše adresa.",
+        "triggerPlaceholder": "Spouštěč",
+        "expansionPlaceholder": "Rozbalí se na",
+        "add": "Přidat",
+        "remove": "Odebrat {{trigger}}",
+        "duplicate": "„{{trigger}}“ již existuje"
       },
       "voiceActivityDetection": {
         "title": "Detekce hlasové aktivity",
@@ -656,7 +682,8 @@
   },
   "overlay": {
     "transcribing": "Přepisuji...",
-    "processing": "Zpracovávám..."
+    "processing": "Zpracovávám...",
+    "commandFailed": "Příkaz selhal — žádná odpověď od AI"
   },
   "whatsNew": {
     "title": "Novinky v Poptart v{{version}}"

@@ -13,12 +13,24 @@
     "general": "Общи",
     "models": "Модели",
     "advanced": "Разширени",
+    "poptart": "Poptart",
     "postProcessing": "Постобработка",
     "history": "История",
     "debug": "Отстраняване",
     "about": "За приложението"
   },
   "onboarding": {
+    "aiSetup": {
+      "title": "Настройка на локален AI",
+      "description": "Командният режим и изчистването на текст в Poptart работят с локален AI модел — всичко остава на вашия Mac. Едно кликване го изтегля и конфигурира (около 5,4 GB). Вече използвате Ollama? Тази стъпка се пропуска сама.",
+      "setupButton": "Настройка на локален AI",
+      "retry": "Опитайте отново",
+      "skip": "Настройка по-късно — диктовката работи и без него",
+      "stageBinary": "Изтегляне на AI двигателя...",
+      "stageServer": "Стартиране на AI двигателя...",
+      "stageModel": "Изтегляне на AI модела...",
+      "error": "Неуспешна настройка: {{error}}"
+    },
     "subtitle": "За да започнете, изберете модел за транскрипция",
     "existingModelsTitle": "Съвместими модели",
     "downloadModelsTitle": "Достъпни за изтегляне",
@@ -157,6 +169,11 @@
   "settings": {
     "modelSettings": {
       "title": "Настройки на {{model}}"
+    },
+    "poptart": {
+      "groups": {
+        "snippets": "Фрагменти"
+      }
     },
     "general": {
       "title": "Общи",
@@ -364,6 +381,15 @@
         "add": "Добавяне",
         "remove": "Премахване на {{word}}",
         "duplicate": "„{{word}}“ вече съществува"
+      },
+      "snippets": {
+        "title": "Фрагменти",
+        "description": "Кажете дума-тригер и тя се разгръща до запазения от вас текст преди всяка AI обработка. Пример: казвайки „моят имейл“, се вмъква вашият адрес.",
+        "triggerPlaceholder": "Тригер",
+        "expansionPlaceholder": "Разгръща се до",
+        "add": "Добавяне",
+        "remove": "Премахване на {{trigger}}",
+        "duplicate": "„{{trigger}}“ вече съществува"
       },
       "voiceActivityDetection": {
         "title": "Откриване на гласова активност",
@@ -656,7 +682,8 @@
   },
   "overlay": {
     "transcribing": "Транскрибиране...",
-    "processing": "Обработка..."
+    "processing": "Обработка...",
+    "commandFailed": "Командата не бе изпълнена — няма отговор от AI"
   },
   "whatsNew": {
     "title": "Ново в Poptart v{{version}}"
