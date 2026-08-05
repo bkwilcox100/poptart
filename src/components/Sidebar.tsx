@@ -41,7 +41,9 @@ interface SectionConfig {
   enabled: (settings: any) => boolean;
 }
 
-const ToasterIcon = (props: IconProps) => <Icon iconNode={toaster} {...props} />;
+const ToasterIcon = (props: IconProps) => (
+  <Icon iconNode={toaster} {...props} />
+);
 
 export const SECTIONS_CONFIG = {
   general: {
