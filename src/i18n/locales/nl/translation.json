@@ -13,12 +13,24 @@
     "general": "Algemeen",
     "models": "Modellen",
     "advanced": "Geavanceerd",
+    "poptart": "Poptart",
     "postProcessing": "Naverwerking",
     "history": "Geschiedenis",
     "debug": "Probleemoplossing",
     "about": "Over Poptart"
   },
   "onboarding": {
+    "aiSetup": {
+      "title": "Lokale AI instellen",
+      "description": "De Opdrachtmodus en tekstopschoning van Poptart draaien op een lokaal AI-model — alles blijft op je Mac. Eén klik downloadt en configureert het (ongeveer 5,4 GB). Gebruik je Ollama al? Dan wordt deze stap overgeslagen.",
+      "setupButton": "Lokale AI instellen",
+      "retry": "Opnieuw proberen",
+      "skip": "Later instellen — dicteren werkt ook zonder",
+      "stageBinary": "AI-engine downloaden...",
+      "stageServer": "AI-engine starten...",
+      "stageModel": "AI-model downloaden...",
+      "error": "Instellen mislukt: {{error}}"
+    },
     "subtitle": "Kies een transcriptiemodel om aan de slag te gaan",
     "existingModelsTitle": "Compatibele modellen",
     "downloadModelsTitle": "Beschikbaar voor download",
@@ -157,6 +169,11 @@
   "settings": {
     "modelSettings": {
       "title": "Instellingen voor {{model}}"
+    },
+    "poptart": {
+      "groups": {
+        "snippets": "Fragmenten"
+      }
     },
     "general": {
       "title": "Algemeen",
@@ -364,6 +381,15 @@
         "add": "Toevoegen",
         "remove": "{{word}} verwijderen",
         "duplicate": "\"{{word}}\" bestaat al"
+      },
+      "snippets": {
+        "title": "Fragmenten",
+        "description": "Spreek een triggerwoord uit en het wordt vóór alle AI-verwerking uitgebreid naar je opgeslagen tekst. Voorbeeld: ‘mijn e-mail’ zeggen voegt je adres in.",
+        "triggerPlaceholder": "Trigger",
+        "expansionPlaceholder": "Wordt uitgebreid naar",
+        "add": "Toevoegen",
+        "remove": "{{trigger}} verwijderen",
+        "duplicate": "‘{{trigger}}’ bestaat al"
       },
       "voiceActivityDetection": {
         "title": "Spraakactiviteitsdetectie (VAD)",
@@ -659,7 +685,8 @@
   },
   "overlay": {
     "transcribing": "Transcriberen...",
-    "processing": "Verwerken..."
+    "processing": "Verwerken...",
+    "commandFailed": "Opdracht mislukt — geen reactie van de AI"
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} blokkeert mogelijk 1 sneltoets",

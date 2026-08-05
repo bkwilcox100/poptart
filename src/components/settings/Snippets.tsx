@@ -35,7 +35,9 @@ export const Snippets: React.FC<SnippetsProps> = React.memo(
         )
       ) {
         toast.error(
-          t("settings.advanced.snippets.duplicate", { trigger: trimmedTrigger }),
+          t("settings.advanced.snippets.duplicate", {
+            trigger: trimmedTrigger,
+          }),
         );
         return;
       }

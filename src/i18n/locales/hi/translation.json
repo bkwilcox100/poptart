@@ -13,12 +13,24 @@
     "general": "सामान्य",
     "models": "मॉडल",
     "advanced": "ऐडवांस",
+    "poptart": "Poptart",
     "postProcessing": "पोस्ट प्रोसेस",
     "history": "इतिहास",
     "debug": "डिबग",
     "about": "के बारे में"
   },
   "onboarding": {
+    "aiSetup": {
+      "title": "लोकल AI सेट अप करें",
+      "description": "Poptart का कमांड मोड और टेक्स्ट क्लीनअप एक लोकल AI मॉडल पर चलते हैं — सब कुछ आपके Mac पर ही रहता है. एक क्लिक में यह डाउनलोड और कॉन्फ़िगर हो जाता है (लगभग 5.4 GB). पहले से Ollama चला रहे हैं? यह चरण अपने आप स्किप हो जाएगा.",
+      "setupButton": "लोकल AI सेट अप करें",
+      "retry": "फिर से कोशिश करें",
+      "skip": "बाद में सेट अप करें — डिक्टेशन इसके बिना भी काम करता है",
+      "stageBinary": "AI इंजन डाउनलोड हो रहा है...",
+      "stageServer": "AI इंजन शुरू हो रहा है...",
+      "stageModel": "AI मॉडल डाउनलोड हो रहा है...",
+      "error": "सेटअप विफल: {{error}}"
+    },
     "subtitle": "शुरू करने के लिए, एक ट्रांसक्रिप्शन मॉडल चुनें",
     "existingModelsTitle": "संगत मॉडल",
     "downloadModelsTitle": "डाउनलोड के लिए उपलब्ध",
@@ -157,6 +169,11 @@
   "settings": {
     "modelSettings": {
       "title": "{{model}} सेटिंग"
+    },
+    "poptart": {
+      "groups": {
+        "snippets": "स्निपेट"
+      }
     },
     "general": {
       "title": "सामान्य",
@@ -364,6 +381,15 @@
         "add": "जोड़ें",
         "remove": "{{word}} हटाएं",
         "duplicate": "\"{{word}}\" पहले से मौजूद है"
+      },
+      "snippets": {
+        "title": "स्निपेट",
+        "description": "कोई ट्रिगर शब्द बोलें और वह किसी भी AI प्रोसेसिंग से पहले आपके सेव किए गए टेक्स्ट में बदल जाएगा. उदाहरण: \"मेरा ईमेल\" बोलने पर आपका पता जुड़ जाता है.",
+        "triggerPlaceholder": "ट्रिगर",
+        "expansionPlaceholder": "इसमें बदलता है",
+        "add": "जोड़ें",
+        "remove": "{{trigger}} हटाएं",
+        "duplicate": "\"{{trigger}}\" पहले से मौजूद है"
       },
       "voiceActivityDetection": {
         "title": "वॉइस एक्टिविटी डिटेक्शन",
@@ -659,7 +685,8 @@
   },
   "overlay": {
     "transcribing": "ट्रांसक्राइब हो रहा है...",
-    "processing": "प्रोसेस हो रहा है..."
+    "processing": "प्रोसेस हो रहा है...",
+    "commandFailed": "कमांड विफल — AI से कोई जवाब नहीं"
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} शायद 1 शॉर्टकट को ब्लॉक कर रहा है",

@@ -167,7 +167,9 @@ async fn download_binary(app: &AppHandle) -> Result<(), String> {
     // Unpack (tar.gz containing the `ollama` binary) and mark executable.
     let tgz = std::fs::File::open(&tgz_path).map_err(|e| e.to_string())?;
     let mut archive = tar::Archive::new(flate2::read::GzDecoder::new(tgz));
-    archive.unpack(&dir).map_err(|e| format!("unpack failed: {e}"))?;
+    archive
+        .unpack(&dir)
+        .map_err(|e| format!("unpack failed: {e}"))?;
     let _ = std::fs::remove_file(&tgz_path);
 
     let bin = managed_binary(app)?;

@@ -13,12 +13,24 @@
     "general": "Genel",
     "models": "Modeller",
     "advanced": "Gelişmiş",
+    "poptart": "Poptart",
     "postProcessing": "Son İşlem",
     "history": "Geçmiş",
     "debug": "Hata Ayıklama",
     "about": "Hakkında"
   },
   "onboarding": {
+    "aiSetup": {
+      "title": "Yerel yapay zekayı kur",
+      "description": "Poptart'ın Komut Modu ve metin temizleme özelliği yerel bir yapay zeka modeliyle çalışır — her şey Mac'inizde kalır. Tek tıklamayla indirilir ve yapılandırılır (yaklaşık 5,4 GB). Ollama'yı zaten çalıştırıyor musunuz? Bu adım kendiliğinden atlanır.",
+      "setupButton": "Yerel yapay zekayı kur",
+      "retry": "Tekrar dene",
+      "skip": "Sonra kur — dikte bu olmadan da çalışır",
+      "stageBinary": "Yapay zeka motoru indiriliyor...",
+      "stageServer": "Yapay zeka motoru başlatılıyor...",
+      "stageModel": "Yapay zeka modeli indiriliyor...",
+      "error": "Kurulum başarısız: {{error}}"
+    },
     "subtitle": "Başlamak için bir transkripsiyon modeli seçin",
     "existingModelsTitle": "Uyumlu Modeller",
     "downloadModelsTitle": "İndirilebilir",
@@ -157,6 +169,11 @@
   "settings": {
     "modelSettings": {
       "title": "{{model}} Ayarları"
+    },
+    "poptart": {
+      "groups": {
+        "snippets": "Parçacıklar"
+      }
     },
     "models": {
       "title": "Transkripsiyon Modelleri",
@@ -364,6 +381,15 @@
         "add": "Ekle",
         "remove": "{{word}} Kaldır",
         "duplicate": "\"{{word}}\" zaten mevcut"
+      },
+      "snippets": {
+        "title": "Parçacıklar",
+        "description": "Bir tetikleyici kelime söyleyin; herhangi bir yapay zeka işleminden önce kayıtlı metninize dönüşsün. Örnek: \"e-postam\" demek adresinizi ekler.",
+        "triggerPlaceholder": "Tetikleyici",
+        "expansionPlaceholder": "Şuna dönüşür",
+        "add": "Ekle",
+        "remove": "{{trigger}} Kaldır",
+        "duplicate": "\"{{trigger}}\" zaten var"
       },
       "voiceActivityDetection": {
         "title": "Ses Etkinliği Algılama",
@@ -656,7 +682,8 @@
   },
   "overlay": {
     "transcribing": "Transkribe ediliyor...",
-    "processing": "İşleniyor..."
+    "processing": "İşleniyor...",
+    "commandFailed": "Komut başarısız — yapay zekadan yanıt yok"
   },
   "whatsNew": {
     "title": "Poptart v{{version}} yenilikleri"

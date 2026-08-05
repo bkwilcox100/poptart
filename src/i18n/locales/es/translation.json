@@ -13,12 +13,24 @@
     "general": "General",
     "models": "Modelos",
     "advanced": "Avanzado",
+    "poptart": "Poptart",
     "postProcessing": "Post proceso",
     "history": "Historial",
     "debug": "Depuración",
     "about": "Acerca de"
   },
   "onboarding": {
+    "aiSetup": {
+      "title": "Configurar IA local",
+      "description": "El Modo Comando y la limpieza de texto de Poptart funcionan con un modelo de IA local — todo se queda en tu Mac. Un clic lo descarga y lo configura (unos 5,4 GB). ¿Ya usas Ollama? Este paso se omite solo.",
+      "setupButton": "Configurar IA local",
+      "retry": "Intentar de nuevo",
+      "skip": "Configurar más tarde — el dictado funciona sin esto",
+      "stageBinary": "Descargando el motor de IA...",
+      "stageServer": "Iniciando el motor de IA...",
+      "stageModel": "Descargando el modelo de IA...",
+      "error": "Error en la configuración: {{error}}"
+    },
     "subtitle": "Para comenzar, elige un modelo de transcripción",
     "existingModelsTitle": "Modelos compatibles",
     "downloadModelsTitle": "Disponibles para descargar",
@@ -157,6 +169,11 @@
   "settings": {
     "modelSettings": {
       "title": "Configuración de {{model}}"
+    },
+    "poptart": {
+      "groups": {
+        "snippets": "Fragmentos"
+      }
     },
     "models": {
       "title": "Modelos de transcripción",
@@ -364,6 +381,15 @@
         "add": "Agregar",
         "remove": "Eliminar {{word}}",
         "duplicate": "\"{{word}}\" ya existe"
+      },
+      "snippets": {
+        "title": "Fragmentos",
+        "description": "Di una palabra clave y se expandirá a tu texto guardado antes de cualquier procesamiento de IA. Ejemplo: decir «mi correo» inserta tu dirección.",
+        "triggerPlaceholder": "Palabra clave",
+        "expansionPlaceholder": "Se expande a",
+        "add": "Agregar",
+        "remove": "Eliminar {{trigger}}",
+        "duplicate": "«{{trigger}}» ya existe"
       },
       "voiceActivityDetection": {
         "title": "Detección de actividad de voz",
@@ -656,7 +682,8 @@
   },
   "overlay": {
     "transcribing": "Transcribiendo...",
-    "processing": "Procesando..."
+    "processing": "Procesando...",
+    "commandFailed": "El comando falló — sin respuesta de la IA"
   },
   "whatsNew": {
     "title": "Nuevo en Poptart v{{version}}"

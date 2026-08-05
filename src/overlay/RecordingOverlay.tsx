@@ -158,7 +158,8 @@ const RecordingOverlay: React.FC = () => {
       const dpr = Math.max(1, window.devicePixelRatio || 1);
       const cssW = cv.clientWidth || 141;
       const cssH = cv.clientHeight || 32;
-      if (cv.width !== Math.round(cssW * dpr)) cv.width = Math.round(cssW * dpr);
+      if (cv.width !== Math.round(cssW * dpr))
+        cv.width = Math.round(cssW * dpr);
       if (cv.height !== Math.round(cssH * dpr))
         cv.height = Math.round(cssH * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -258,7 +259,9 @@ const RecordingOverlay: React.FC = () => {
     `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
 
   // ---- Shared building blocks (one visual language for every overlay form) ----
-  const waveform = <canvas ref={canvasRef} className="swave" aria-hidden="true" />;
+  const waveform = (
+    <canvas ref={canvasRef} className="swave" aria-hidden="true" />
+  );
 
   // (left) | waveform (center) | timer (right) — same structure for pill &
   // panel, so the Live morph is a pure width change.

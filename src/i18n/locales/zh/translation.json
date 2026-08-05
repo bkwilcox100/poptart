@@ -13,12 +13,24 @@
     "general": "通用",
     "models": "模型",
     "advanced": "高级",
+    "poptart": "Poptart",
     "postProcessing": "后处理",
     "history": "历史记录",
     "debug": "调试",
     "about": "关于"
   },
   "onboarding": {
+    "aiSetup": {
+      "title": "设置本地 AI",
+      "description": "Poptart 的命令模式和文本清理由本地 AI 模型运行 — 所有数据都保留在你的 Mac 上。一键即可下载并完成配置（约 5.4 GB）。已经在运行 Ollama？此步骤会自动跳过。",
+      "setupButton": "设置本地 AI",
+      "retry": "重试",
+      "skip": "稍后设置 — 没有它也能听写",
+      "stageBinary": "正在下载 AI 引擎...",
+      "stageServer": "正在启动 AI 引擎...",
+      "stageModel": "正在下载 AI 模型...",
+      "error": "设置失败：{{error}}"
+    },
     "subtitle": "请选择一个转录模型以开始使用",
     "existingModelsTitle": "兼容的模型",
     "downloadModelsTitle": "可供下载",
@@ -157,6 +169,11 @@
   "settings": {
     "modelSettings": {
       "title": "{{model}} 设置"
+    },
+    "poptart": {
+      "groups": {
+        "snippets": "文本片段"
+      }
     },
     "models": {
       "title": "转录模型",
@@ -364,6 +381,15 @@
         "add": "添加",
         "remove": "删除 {{word}}",
         "duplicate": "\"{{word}}\" 已存在"
+      },
+      "snippets": {
+        "title": "文本片段",
+        "description": "说出触发词，它会在 AI 处理前展开为你保存的文本。例如：说“我的邮箱”即可插入你的地址。",
+        "triggerPlaceholder": "触发词",
+        "expansionPlaceholder": "展开为",
+        "add": "添加",
+        "remove": "删除 {{trigger}}",
+        "duplicate": "“{{trigger}}”已存在"
       },
       "voiceActivityDetection": {
         "title": "语音活动检测",
@@ -656,7 +682,8 @@
   },
   "overlay": {
     "transcribing": "正在转录...",
-    "processing": "处理中..."
+    "processing": "处理中...",
+    "commandFailed": "命令失败 — AI 无响应"
   },
   "whatsNew": {
     "title": "Poptart v{{version}} 新功能"
