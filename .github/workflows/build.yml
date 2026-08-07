@@ -248,6 +248,32 @@ jobs:
           echo "CERT_ID=$CERT_ID" >> $GITHUB_ENV
           echo "Certificate imported."
 
+      # tauri-bundler tests the Apple vars with `var_os` — PRESENCE, not value —
+      # so an empty string still triggers cert import (and notarization, which
+      # hard-errors on a blank team id). A step-level `env:` cannot omit a key,
+      # but $GITHUB_ENV can: export only the secrets that are actually set, and
+      # leave the rest genuinely unset so bundling falls back to ad-hoc signing.
+      - name: Export Apple signing environment
+        if: contains(inputs.platform, 'macos') && inputs.sign-binaries
+        shell: bash
+        env:
+          APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
+          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+          APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: |
+          set -euo pipefail
+          for var in APPLE_CERTIFICATE APPLE_CERTIFICATE_PASSWORD APPLE_ID \
+                     APPLE_ID_PASSWORD APPLE_PASSWORD APPLE_TEAM_ID; do
+            value="${!var:-}"
+            [ -n "$value" ] || continue
+            # Heredoc form: the certificate/key values may be multiline.
+            printf '%s<<__GHENV_EOF__\n%s\n__GHENV_EOF__\n' "$var" "$value" >> "$GITHUB_ENV"
+            echo "exported $var"
+          done
+
       - name: Patch asset name pattern
         id: patch-release-name
         shell: bash
@@ -501,12 +527,8 @@ jobs:
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          APPLE_ID: ${{ inputs.sign-binaries && secrets.APPLE_ID || '' }}
-          APPLE_ID_PASSWORD: ${{ inputs.sign-binaries && secrets.APPLE_ID_PASSWORD || '' }}
-          APPLE_PASSWORD: ${{ inputs.sign-binaries && secrets.APPLE_PASSWORD || '' }}
-          APPLE_TEAM_ID: ${{ inputs.sign-binaries && secrets.APPLE_TEAM_ID || '' }}
-          APPLE_CERTIFICATE: ${{ inputs.sign-binaries && secrets.APPLE_CERTIFICATE || '' }}
-          APPLE_CERTIFICATE_PASSWORD: ${{ inputs.sign-binaries && secrets.APPLE_CERTIFICATE_PASSWORD || '' }}
+          # APPLE_* cert/notarization vars come from the "Export Apple signing
+          # environment" step above — they must be absent, not empty, when unset.
           # Fall back to ad-hoc signing ('-') when no Apple cert secret exists, so CI
           # isn't broken by the Developer ID identity hardcoded in tauri.conf.json.
           APPLE_SIGNING_IDENTITY: ${{ (inputs.sign-binaries && secrets.APPLE_CERTIFICATE != '') && env.CERT_ID || '-' }}
@@ -534,10 +556,10 @@ jobs:
           echo "=== Frameworks contents ==="
           ls -la "$APP/Contents/Frameworks/" | grep onnx || true
           echo "=== Binary linked libs ==="
-          otool -L "$APP/Contents/MacOS/handy" | grep onnx || true
+          otool -L "$APP/Contents/MacOS/poptart" | grep onnx || true
           echo "=== Checking all @rpath deps are satisfied ==="
           # Extract every @rpath lib the binary needs
-          otool -L "$APP/Contents/MacOS/handy" | grep '@rpath/' | awk '{print $1}' | while read dep; do
+          otool -L "$APP/Contents/MacOS/poptart" | grep '@rpath/' | awk '{print $1}' | while read dep; do
             libname=$(basename "$dep")
             if [ ! -f "$APP/Contents/Frameworks/$libname" ]; then
               echo "MISSING: $libname not found in Frameworks/"
@@ -634,7 +656,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          # The runtime smoke test launches the packaged handy binary, which links
+          # The runtime smoke test launches the packaged poptart binary, which links
           # GTK (via tao) even for the headless --list-devices path and therefore
           # needs a display to start. CI runners are headless, so provide a virtual
           # X server via xvfb-run.
@@ -670,11 +692,11 @@ jobs:
           smoke_binary() {
             local root="$1"
             local label="$2"
-            # Run under a virtual X server: handy initializes GTK on startup even
+            # Run under a virtual X server: poptart initializes GTK on startup even
             # on the headless --list-devices path, which fails without a display.
             HANDY_NO_GTK_LAYER_SHELL=1 \
             LD_LIBRARY_PATH="${root}/usr/lib/Handy:${root}/usr/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}" \
-              xvfb-run -a "${root}/usr/bin/handy" --list-devices >/tmp/handy-package-smoke.log
+              xvfb-run -a "${root}/usr/bin/poptart" --list-devices >/tmp/poptart-package-smoke.log
             echo "${label} --list-devices smoke passed"
           }
 
@@ -683,7 +705,7 @@ jobs:
               echo "Auditing deb package: ${deb}"
               listing="$(mktemp)"
               dpkg-deb -c "$deb" > "$listing"
-              require_pattern "$listing" 'usr/bin/handy$' "handy binary"
+              require_pattern "$listing" 'usr/bin/poptart$' "poptart binary"
               require_pattern "$listing" 'usr/lib/Handy/libtranscribe\.so\.[0-9]+$' "transcribe runtime library (SONAME)"
               require_pattern "$listing" 'usr/lib/Handy/libggml-cpu.*\.so' "ggml CPU backend module"
               if [[ "${{ inputs.platform }}" == *"ubuntu-22.04"* && "${{ inputs.target }}" == "x86_64-unknown-linux-gnu" ]]; then
@@ -713,7 +735,7 @@ jobs:
               echo "Auditing rpm package: ${rpm_pkg}"
               listing="$(mktemp)"
               rpm -qpl "$rpm_pkg" > "$listing"
-              require_pattern "$listing" '/usr/bin/handy$' "handy binary"
+              require_pattern "$listing" '/usr/bin/poptart$' "poptart binary"
               require_pattern "$listing" '/usr/lib/Handy/libtranscribe\.so\.[0-9]+$' "transcribe runtime library (SONAME)"
               require_pattern "$listing" '/usr/lib/Handy/libggml-cpu.*\.so' "ggml CPU backend module"
               # Same /usr/lib pollution guard as the deb audit (issue #1639).
@@ -735,7 +757,7 @@ jobs:
               (
                 cd "$workdir"
                 ./Handy.AppImage --appimage-extract >/dev/null
-                require_path "squashfs-root/usr/bin/handy" "AppImage handy binary"
+                require_path "squashfs-root/usr/bin/poptart" "AppImage poptart binary"
                 # The SONAME (libtranscribe.so.N) is the name the loader
                 # resolves; the bare .so alias may or may not be present.
                 if ! find "squashfs-root/usr/lib" -name 'libtranscribe.so*' | grep -q .; then
@@ -806,9 +828,9 @@ jobs:
           function Assert-PackageContents {
             param([string]$Root, [string]$Label)
 
-            $handy = Get-ChildItem $Root -Filter "handy.exe" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1
-            if (-not $handy) {
-              throw "$Label package is missing handy.exe"
+            $poptart = Get-ChildItem $Root -Filter "poptart.exe" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1
+            if (-not $poptart) {
+              throw "$Label package is missing poptart.exe"
             }
             foreach ($dll in $stagedDlls) {
               if (-not (Get-ChildItem $Root -Filter $dll.Name -Recurse -ErrorAction SilentlyContinue)) {
@@ -816,10 +838,10 @@ jobs:
               }
             }
 
-            $deviceOutput = (& $handy.FullName --list-devices | Out-String)
+            $deviceOutput = (& $poptart.FullName --list-devices | Out-String)
             $deviceOutput | Write-Host
             if ($LASTEXITCODE -ne 0) {
-              throw "$Label handy.exe --list-devices failed"
+              throw "$Label poptart.exe --list-devices failed"
             }
             if ("${{ inputs.target }}" -like "aarch64*" -and $deviceOutput -match "kind=(vulkan|cuda|metal|gpu)") {
               throw "$Label Windows ARM64 package unexpectedly exposed a GPU compute device"
