@@ -18,6 +18,8 @@ import Onboarding, {
 } from "./components/onboarding";
 import { Sidebar, SidebarSection, SECTIONS_CONFIG } from "./components/Sidebar";
 import { WhatsNewGate } from "./components/whats-new";
+// PROTOTYPE — throwaway, dev-only settings variants.
+import { SettingsPrototype } from "./components/settings/prototype/SettingsPrototype";
 import { useSettings } from "./hooks/useSettings";
 import { useSettingsStore } from "./stores/settingsStore";
 import { commands } from "@/bindings";
@@ -297,7 +299,7 @@ function App() {
   } else if (onboardingStep === "ai") {
     content = <AiSetupOnboarding onComplete={handleAiSetupComplete} />;
   } else {
-    content = (
+    const settingsShell = (
       <div
         dir={direction}
         className="h-screen flex flex-col select-none cursor-default"
@@ -323,6 +325,12 @@ function App() {
         {/* Fixed footer at bottom */}
         <Footer />
       </div>
+    );
+    // PROTOTYPE — throwaway (src/components/settings/prototype). Dev only.
+    content = import.meta.env.DEV ? (
+      <SettingsPrototype current={settingsShell} />
+    ) : (
+      settingsShell
     );
   }
 
