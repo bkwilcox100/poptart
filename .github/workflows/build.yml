@@ -56,6 +56,11 @@ jobs:
     permissions:
       contents: write
     runs-on: ${{ inputs.platform }}
+    env:
+      # Secret-presence flags: the `secrets` context is not allowed in step-level
+      # `if:`, so steps test these env flags instead.
+      HAVE_APPLE_CERT: ${{ secrets.APPLE_CERTIFICATE != '' }}
+      HAVE_AZURE_SIGNING: ${{ secrets.AZURE_CLIENT_ID != '' }}
     steps:
       # Kept for git checkout and general tooling headroom. The native
       # transcribe-cpp-sys build no longer needs path help: since 0.1.3 its
@@ -163,7 +168,7 @@ jobs:
           cache: true
 
       - name: Cache trusted-signing-cli
-        if: contains(inputs.platform, 'windows') && inputs.sign-binaries && secrets.AZURE_CLIENT_ID != ''
+        if: contains(inputs.platform, 'windows') && inputs.sign-binaries && env.HAVE_AZURE_SIGNING == 'true'
         id: cache-tsc
         uses: actions/cache@v5
         with:
@@ -171,7 +176,7 @@ jobs:
           key: trusted-signing-cli-${{ env.TSC_VERSION }}-${{ runner.os }}-${{ runner.arch }}
 
       - name: Install trusted-signing-cli
-        if: contains(inputs.platform, 'windows') && inputs.sign-binaries && secrets.AZURE_CLIENT_ID != '' && steps.cache-tsc.outputs.cache-hit != 'true'
+        if: contains(inputs.platform, 'windows') && inputs.sign-binaries && env.HAVE_AZURE_SIGNING == 'true' && steps.cache-tsc.outputs.cache-hit != 'true'
         run: cargo install trusted-signing-cli@${{ env.TSC_VERSION }}
 
       - name: Prepare Vulkan SDK for Ubuntu 24.04
@@ -220,7 +225,7 @@ jobs:
       # Forks without signing secrets still get usable (unsigned) artifacts:
       # every signing step is skipped when its secret is absent.
       - name: import Apple Developer Certificate
-        if: contains(inputs.platform, 'macos') && inputs.sign-binaries && secrets.APPLE_CERTIFICATE != ''
+        if: contains(inputs.platform, 'macos') && inputs.sign-binaries && env.HAVE_APPLE_CERT == 'true'
         env:
           APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
           APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
@@ -236,7 +241,7 @@ jobs:
           security find-identity -v -p codesigning build.keychain
 
       - name: verify certificate
-        if: contains(inputs.platform, 'macos') && inputs.sign-binaries && secrets.APPLE_CERTIFICATE != ''
+        if: contains(inputs.platform, 'macos') && inputs.sign-binaries && env.HAVE_APPLE_CERT == 'true'
         run: |
           CERT_INFO=$(security find-identity -v -p codesigning build.keychain | grep "Developer ID Application")
           CERT_ID=$(echo "$CERT_INFO" | awk -F'"' '{print $2}')
