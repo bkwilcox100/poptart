@@ -619,6 +619,14 @@
           "details": "Poptart's lokale spraak-naar-tekst is gebouwd op transcribe.cpp en ggml. Met dank aan het geweldige werk van Georgi Gerganov en alle bijdragers."
         }
       }
+    },
+    "groups": {
+      "dictation": "Dicteren",
+      "text": "Tekst en AI"
+    },
+    "search": {
+      "placeholder": "Instellingen zoeken",
+      "noResults": "Geen instellingen komen overeen met je zoekopdracht"
     }
   },
   "footer": {

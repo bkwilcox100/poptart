@@ -619,6 +619,14 @@
         "label": "Visa nyheter",
         "description": "Visa versionsinformation efter Poptart-uppdateringar"
       }
+    },
+    "groups": {
+      "dictation": "Diktering",
+      "text": "Text och AI"
+    },
+    "search": {
+      "placeholder": "Sök inställningar",
+      "noResults": "Inga inställningar matchar din sökning"
     }
   },
   "footer": {

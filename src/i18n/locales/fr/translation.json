@@ -619,6 +619,14 @@
         "label": "Afficher les nouveautés",
         "description": "Afficher les notes de version après les mises à jour de Poptart"
       }
+    },
+    "groups": {
+      "dictation": "Dictée",
+      "text": "Texte et IA"
+    },
+    "search": {
+      "placeholder": "Rechercher dans les réglages",
+      "noResults": "Aucun réglage ne correspond à votre recherche"
     }
   },
   "footer": {

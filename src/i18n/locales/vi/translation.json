@@ -619,6 +619,14 @@
         "label": "Hiển thị điểm mới",
         "description": "Hiển thị ghi chú phát hành sau khi Poptart cập nhật"
       }
+    },
+    "groups": {
+      "dictation": "Đọc chính tả",
+      "text": "Văn bản và AI"
+    },
+    "search": {
+      "placeholder": "Tìm kiếm cài đặt",
+      "noResults": "Không có cài đặt nào khớp với tìm kiếm"
     }
   },
   "footer": {

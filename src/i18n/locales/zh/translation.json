@@ -619,6 +619,14 @@
         "label": "显示新功能",
         "description": "Poptart 更新后显示发行说明"
       }
+    },
+    "groups": {
+      "dictation": "语音输入",
+      "text": "文本与 AI"
+    },
+    "search": {
+      "placeholder": "搜索设置",
+      "noResults": "没有匹配的设置"
     }
   },
   "footer": {

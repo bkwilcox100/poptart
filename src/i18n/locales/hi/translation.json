@@ -619,6 +619,14 @@
           "details": "Poptart का लोकल स्पीच-टू-टेक्स्ट transcribe.cpp और ggml पर आधारित है. Georgi Gerganov और योगदान देने वालों के शानदार काम के लिए धन्यवाद."
         }
       }
+    },
+    "groups": {
+      "dictation": "डिक्टेशन",
+      "text": "टेक्स्ट और AI"
+    },
+    "search": {
+      "placeholder": "सेटिंग्स खोजें",
+      "noResults": "आपकी खोज से कोई सेटिंग मेल नहीं खाती"
     }
   },
   "footer": {

@@ -619,6 +619,14 @@
         "label": "顯示新功能",
         "description": "Poptart 更新後顯示版本資訊"
       }
+    },
+    "groups": {
+      "dictation": "語音輸入",
+      "text": "文字與 AI"
+    },
+    "search": {
+      "placeholder": "搜尋設定",
+      "noResults": "沒有符合的設定"
     }
   },
   "footer": {
