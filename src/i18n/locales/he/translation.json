@@ -634,7 +634,11 @@
     "portableUpdateMessage": "התקנות ניידות אינן מתעדכנות אוטומטית. הורד למטה את המתקין המתאים למערכת שלך, הפעל אותו והתקן לאותה תיקייה — תיקיית Data/ (הגדרות, מודלים, הקלטות) נשמרת במקומה.",
     "portableUpdateButton": "הורדת המתקין",
     "portableUpdateBrowseMessage": "התקנות ניידות אינן מתעדכנות אוטומטית. הורד את הגרסה האחרונה המתאימה למערכת שלך מ-GitHub Releases והתקן אותה לאותה תיקייה — תיקיית Data/ (הגדרות, מודלים, הקלטות) נשמרת במקומה.",
-    "portableUpdateBrowseButton": "פתח את GitHub Releases"
+    "portableUpdateBrowseButton": "פתח את GitHub Releases",
+    "updateInstallFailedTitle": "התקנת העדכון נכשלה",
+    "updateInstallFailedMessage": "Poptart לא הצליח להתקין את העדכון. הורד את הגרסה האחרונה מ-GitHub Releases והתקן אותה ידנית.",
+    "updateCheckFailedTitle": "בדיקת העדכונים נכשלה",
+    "updateCheckFailedMessage": "Poptart לא הצליח לבדוק עדכונים. בדוק את החיבור שלך ונסה שוב."
   },
   "common": {
     "loading": "טוען...",

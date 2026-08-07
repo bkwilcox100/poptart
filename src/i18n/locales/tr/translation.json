@@ -634,7 +634,11 @@
     "portableUpdateMessage": "Taşınabilir kurulumlar otomatik olarak güncellenemez. Aşağıdan sisteminize uygun yükleyiciyi indirin, çalıştırın ve aynı klasöre kurun — Data/ klasörünüz (ayarlar, modeller, kayıtlar) yerinde kalır.",
     "portableUpdateButton": "Yükleyiciyi indir",
     "portableUpdateBrowseMessage": "Taşınabilir kurulumlar otomatik olarak güncellenemez. Sisteminize uygun en son sürümü GitHub Releases’ten indirin ve aynı klasöre kurun — Data/ klasörünüz (ayarlar, modeller, kayıtlar) yerinde kalır.",
-    "portableUpdateBrowseButton": "GitHub Releases’i aç"
+    "portableUpdateBrowseButton": "GitHub Releases’i aç",
+    "updateInstallFailedTitle": "Güncelleme kurulamadı",
+    "updateInstallFailedMessage": "Poptart güncellemeyi kuramadı. En son sürümü GitHub Releases’ten indirip elle kurun.",
+    "updateCheckFailedTitle": "Güncellemeler kontrol edilemedi",
+    "updateCheckFailedMessage": "Poptart güncellemeleri kontrol edemedi. Bağlantınızı kontrol edip tekrar deneyin."
   },
   "common": {
     "loading": "Yükleniyor...",

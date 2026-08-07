@@ -634,7 +634,11 @@
     "portableUpdateMessage": "Le installazioni portatili non possono essere aggiornate automaticamente. Scarica qui sotto il programma di installazione per il tuo sistema, eseguilo e installalo nella stessa cartella: la cartella Data/ (impostazioni, modelli, registrazioni) viene mantenuta.",
     "portableUpdateButton": "Scarica il programma di installazione",
     "portableUpdateBrowseMessage": "Le installazioni portatili non possono essere aggiornate automaticamente. Scarica da GitHub Releases la versione più recente per il tuo sistema e installala nella stessa cartella: la cartella Data/ (impostazioni, modelli, registrazioni) viene mantenuta.",
-    "portableUpdateBrowseButton": "Apri i rilasci su GitHub"
+    "portableUpdateBrowseButton": "Apri i rilasci su GitHub",
+    "updateInstallFailedTitle": "Installazione dell’aggiornamento non riuscita",
+    "updateInstallFailedMessage": "Poptart non è riuscito a installare l’aggiornamento. Scarica la versione più recente dai rilasci su GitHub e installala manualmente.",
+    "updateCheckFailedTitle": "Controllo aggiornamenti non riuscito",
+    "updateCheckFailedMessage": "Poptart non è riuscito a controllare gli aggiornamenti. Verifica la connessione e riprova."
   },
   "common": {
     "loading": "Caricamento...",

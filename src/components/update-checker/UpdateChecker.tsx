@@ -17,6 +17,16 @@ interface UpdateCheckerProps {
   className?: string;
 }
 
+const RELEASES_URL = "https://github.com/bkwilcox100/poptart/releases/latest";
+
+// Updater failures (bad signature, 404 manifest, network) carry the only clue to
+// the cause, but they can be paragraphs long — keep one readable line.
+const errorDetail = (error: unknown): string => {
+  const message = error instanceof Error ? error.message : String(error);
+  const line = message.replace(/\s+/g, " ").trim();
+  return line.length > 140 ? `${line.slice(0, 139)}…` : line;
+};
+
 const UpdateChecker: React.FC<UpdateCheckerProps> = ({ className = "" }) => {
   const { t } = useTranslation();
   // Update checking state
@@ -30,6 +40,12 @@ const UpdateChecker: React.FC<UpdateCheckerProps> = ({ className = "" }) => {
   const [portableInstallerUrl, setPortableInstallerUrl] = useState<string>(
     PORTABLE_RELEASES_URL,
   );
+  // A failed update used to be console-only, so a broken install (e.g. signature
+  // verification after a key rotation) looked like the click did nothing.
+  const [updateError, setUpdateError] = useState<{
+    kind: "install" | "check";
+    detail: string;
+  } | null>(null);
 
   const { settings, isLoading } = useSettings();
   const settingsLoaded = !isLoading && settings !== null;
@@ -75,6 +91,7 @@ const UpdateChecker: React.FC<UpdateCheckerProps> = ({ className = "" }) => {
 
     try {
       setIsChecking(true);
+      setUpdateError(null);
       const update = await check();
 
       if (update) {
@@ -100,6 +117,11 @@ const UpdateChecker: React.FC<UpdateCheckerProps> = ({ className = "" }) => {
       }
     } catch (error) {
       console.error("Failed to check for updates:", error);
+      // Background checks fire on mount and fail on any flaky network — only the
+      // user who actually clicked deserves an error in the UI.
+      if (isManualCheckRef.current) {
+        setUpdateError({ kind: "check", detail: errorDetail(error) });
+      }
     } finally {
       setIsChecking(false);
       isManualCheckRef.current = false;
@@ -123,6 +145,7 @@ const UpdateChecker: React.FC<UpdateCheckerProps> = ({ className = "" }) => {
 
     try {
       setIsInstalling(true);
+      setUpdateError(null);
       setDownloadProgress(0);
       downloadedBytesRef.current = 0;
       contentLengthRef.current = 0;
@@ -155,6 +178,7 @@ const UpdateChecker: React.FC<UpdateCheckerProps> = ({ className = "" }) => {
       await relaunch();
     } catch (error) {
       console.error("Failed to install update:", error);
+      setUpdateError({ kind: "install", detail: errorDetail(error) });
     } finally {
       setIsInstalling(false);
       setDownloadProgress(0);
@@ -230,6 +254,47 @@ const UpdateChecker: React.FC<UpdateCheckerProps> = ({ className = "" }) => {
                   ? t("footer.portableUpdateButton")
                   : t("footer.portableUpdateBrowseButton")}
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {updateError && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+          role="alert"
+        >
+          <div className="bg-background border border-mid-gray/20 rounded-lg p-6 max-w-md w-full mx-4 space-y-4">
+            <h2 className="text-base font-semibold">
+              {updateError.kind === "install"
+                ? t("footer.updateInstallFailedTitle")
+                : t("footer.updateCheckFailedTitle")}
+            </h2>
+            <p className="text-sm text-text/70">
+              {updateError.kind === "install"
+                ? t("footer.updateInstallFailedMessage")
+                : t("footer.updateCheckFailedMessage")}
+            </p>
+            <p className="text-xs text-text/50 break-words font-mono">
+              {updateError.detail}
+            </p>
+            <div className="flex gap-2 justify-end">
+              <button
+                className="px-3 py-1.5 text-sm rounded border border-mid-gray/20 hover:bg-mid-gray/10 transition-colors"
+                onClick={() => setUpdateError(null)}
+              >
+                {t("common.close")}
+              </button>
+              {updateError.kind === "install" && (
+                <button
+                  className="px-3 py-1.5 text-sm rounded bg-logo-primary text-white hover:bg-logo-primary/80 transition-colors"
+                  onClick={() => {
+                    openUrl(RELEASES_URL);
+                    setUpdateError(null);
+                  }}
+                >
+                  {t("footer.portableUpdateBrowseButton")}
+                </button>
+              )}
             </div>
           </div>
         </div>

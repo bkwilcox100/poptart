@@ -634,7 +634,11 @@
     "portableUpdateMessage": "पोर्टेबल इन्स्टलहरू स्वतः अपडेट गर्न सकिँदैन। तलबाट आफ्नो प्रणालीका लागि इन्स्टलर डाउनलोड गर्नुहोस्, चलाउनुहोस् र उही फोल्डरमा इन्स्टल गर्नुहोस् — तपाईंको Data/ फोल्डर (सेटिङ, मोडेल, रेकर्डिङ) जस्ताको तस्तै रहन्छ।",
     "portableUpdateButton": "इन्स्टलर डाउनलोड गर्नुहोस्",
     "portableUpdateBrowseMessage": "पोर्टेबल इन्स्टलहरू स्वतः अपडेट गर्न सकिँदैन। GitHub Releases बाट आफ्नो प्रणालीका लागि पछिल्लो संस्करण डाउनलोड गर्नुहोस् र उही फोल्डरमा इन्स्टल गर्नुहोस् — तपाईंको Data/ फोल्डर (सेटिङ, मोडेल, रेकर्डिङ) जस्ताको तस्तै रहन्छ।",
-    "portableUpdateBrowseButton": "GitHub Releases खोल्नुहोस्"
+    "portableUpdateBrowseButton": "GitHub Releases खोल्नुहोस्",
+    "updateInstallFailedTitle": "अपडेट इन्स्टल हुन सकेन",
+    "updateInstallFailedMessage": "Poptart ले अपडेट इन्स्टल गर्न सकेन। GitHub Releases बाट पछिल्लो संस्करण डाउनलोड गरेर म्यानुअल रूपमा इन्स्टल गर्नुहोस्।",
+    "updateCheckFailedTitle": "अपडेट जाँच हुन सकेन",
+    "updateCheckFailedMessage": "Poptart ले अपडेट जाँच गर्न सकेन। आफ्नो जडान जाँच गरेर फेरि प्रयास गर्नुहोस्।"
   },
   "whatsNew": {
     "title": "Poptart v{{version}} मा नयाँ"

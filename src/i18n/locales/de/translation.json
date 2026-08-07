@@ -634,7 +634,11 @@
     "portableUpdateMessage": "Portable Installationen können nicht automatisch aktualisiert werden. Lade unten den Installer für dein System herunter, führe ihn aus und installiere in denselben Ordner — dein Data/-Ordner (Einstellungen, Modelle, Aufnahmen) bleibt erhalten.",
     "portableUpdateButton": "Installer herunterladen",
     "portableUpdateBrowseMessage": "Portable Installationen können nicht automatisch aktualisiert werden. Lade die neueste Version für dein System von GitHub Releases herunter und installiere sie in denselben Ordner — dein Data/-Ordner (Einstellungen, Modelle, Aufnahmen) bleibt erhalten.",
-    "portableUpdateBrowseButton": "GitHub Releases öffnen"
+    "portableUpdateBrowseButton": "GitHub Releases öffnen",
+    "updateInstallFailedTitle": "Update-Installation fehlgeschlagen",
+    "updateInstallFailedMessage": "Poptart konnte das Update nicht installieren. Lade die neueste Version von GitHub Releases herunter und installiere sie manuell.",
+    "updateCheckFailedTitle": "Update-Prüfung fehlgeschlagen",
+    "updateCheckFailedMessage": "Poptart konnte nicht nach Updates suchen. Prüfe deine Verbindung und versuche es erneut."
   },
   "common": {
     "loading": "Wird geladen...",
