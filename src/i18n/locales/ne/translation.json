@@ -619,6 +619,14 @@
           "details": "Poptart को स्थानीय स्पिच-टु-टेक्स्ट transcribe.cpp र ggml मा आधारित छ। Georgi Gerganov र योगदानकर्ताहरूको उत्कृष्ट कामका लागि धन्यवाद।"
         }
       }
+    },
+    "groups": {
+      "dictation": "डिक्टेशन",
+      "text": "पाठ र AI"
+    },
+    "search": {
+      "placeholder": "सेटिङ खोज्नुहोस्",
+      "noResults": "तपाईंको खोजसँग मिल्ने सेटिङ छैन"
     }
   },
   "footer": {

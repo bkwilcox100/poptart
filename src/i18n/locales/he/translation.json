@@ -619,6 +619,14 @@
         "label": "הצג מה חדש",
         "description": "הצג הערות גרסה לאחר עדכוני Poptart"
       }
+    },
+    "groups": {
+      "dictation": "הכתבה",
+      "text": "טקסט ובינה מלאכותית"
+    },
+    "search": {
+      "placeholder": "חיפוש בהגדרות",
+      "noResults": "אין הגדרות התואמות את החיפוש"
     }
   },
   "footer": {

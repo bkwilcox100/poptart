@@ -619,6 +619,14 @@
         "label": "새 소식 표시",
         "description": "Poptart 업데이트 후 릴리스 노트를 표시합니다"
       }
+    },
+    "groups": {
+      "dictation": "받아쓰기",
+      "text": "텍스트 및 AI"
+    },
+    "search": {
+      "placeholder": "설정 검색",
+      "noResults": "검색과 일치하는 설정이 없습니다"
     }
   },
   "footer": {

@@ -619,6 +619,14 @@
         "label": "Zobrazovat novinky",
         "description": "Zobrazovat poznámky k vydání po aktualizacích Poptart"
       }
+    },
+    "groups": {
+      "dictation": "Diktování",
+      "text": "Text a AI"
+    },
+    "search": {
+      "placeholder": "Hledat v nastavení",
+      "noResults": "Hledání neodpovídá žádné nastavení"
     }
   },
   "footer": {

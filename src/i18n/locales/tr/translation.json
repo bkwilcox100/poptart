@@ -619,6 +619,14 @@
         "label": "Yenilikleri Göster",
         "description": "Poptart güncellemelerinden sonra sürüm notlarını göster"
       }
+    },
+    "groups": {
+      "dictation": "Dikte",
+      "text": "Metin ve Yapay Zekâ"
+    },
+    "search": {
+      "placeholder": "Ayarlarda ara",
+      "noResults": "Aramanızla eşleşen ayar yok"
     }
   },
   "footer": {

@@ -619,6 +619,14 @@
         "label": "Neuerungen anzeigen",
         "description": "Versionshinweise nach Poptart-Updates anzeigen"
       }
+    },
+    "groups": {
+      "dictation": "Diktat",
+      "text": "Text & KI"
+    },
+    "search": {
+      "placeholder": "Einstellungen durchsuchen",
+      "noResults": "Keine Einstellungen entsprechen deiner Suche"
     }
   },
   "footer": {

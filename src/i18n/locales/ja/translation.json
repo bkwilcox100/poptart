@@ -619,6 +619,14 @@
         "label": "新機能を表示",
         "description": "Poptart のアップデート後にリリースノートを表示"
       }
+    },
+    "groups": {
+      "dictation": "音声入力",
+      "text": "テキストとAI"
+    },
+    "search": {
+      "placeholder": "設定を検索",
+      "noResults": "検索に一致する設定はありません"
     }
   },
   "footer": {

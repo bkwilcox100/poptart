@@ -619,6 +619,14 @@
           "details": "Poptarts lokale tale-til-tekst funktionalitet er bygget på transcribe.cpp og ggml. Tak for det fantastiske arbejde af Georgi Gerganov og bidragyderne."
         }
       }
+    },
+    "groups": {
+      "dictation": "Diktering",
+      "text": "Tekst og AI"
+    },
+    "search": {
+      "placeholder": "Søg i indstillinger",
+      "noResults": "Ingen indstillinger matcher din søgning"
     }
   },
   "footer": {

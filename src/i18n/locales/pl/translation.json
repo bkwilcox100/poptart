@@ -619,6 +619,14 @@
         "label": "Pokaż nowości",
         "description": "Pokazuj informacje o wydaniu po aktualizacjach Poptart"
       }
+    },
+    "groups": {
+      "dictation": "Dyktowanie",
+      "text": "Tekst i AI"
+    },
+    "search": {
+      "placeholder": "Szukaj w ustawieniach",
+      "noResults": "Żadne ustawienie nie pasuje do wyszukiwania"
     }
   },
   "footer": {
