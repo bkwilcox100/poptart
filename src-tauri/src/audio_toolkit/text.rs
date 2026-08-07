@@ -432,6 +432,50 @@ const SUBJECT_WORDS: [&str; 16] = [
     "everybody",
 ];
 
+/// Spoken punctuation commands, as the trailing words of a dictation. Matched
+/// against the last one or two words — longest form first is unnecessary since
+/// both lengths are checked independently.
+const SPOKEN_PUNCTUATION_ENDINGS: [&str; 9] = [
+    "period",
+    "comma",
+    "full stop",
+    "question mark",
+    "exclamation mark",
+    "exclamation point",
+    "new line",
+    "newline",
+    "new paragraph",
+];
+
+/// True when the transcript's final words are a spoken punctuation command
+/// rather than content — "…is that final question mark".
+///
+/// Post-processing turns these words into the mark they name, so appending a
+/// terminal `.` here hands the LLM a contradiction (a literal period *and* an
+/// instruction to emit `?`) and it resolves it differently run to run:
+/// `"final"?`, `. "Final?"`, and `, "Final".?` all came out of the same input.
+fn ends_with_spoken_punctuation(text: &str) -> bool {
+    let words: Vec<String> = text
+        .split_whitespace()
+        .rev()
+        .take(2)
+        .map(|w| {
+            w.trim_matches(|c: char| !c.is_alphanumeric())
+                .to_lowercase()
+        })
+        .collect();
+    let Some(last) = words.first() else {
+        return false;
+    };
+    if SPOKEN_PUNCTUATION_ENDINGS.contains(&last.as_str()) {
+        return true;
+    }
+    match words.get(1) {
+        Some(prev) => SPOKEN_PUNCTUATION_ENDINGS.contains(&format!("{prev} {last}").as_str()),
+        None => false,
+    }
+}
+
 /// Append terminal punctuation when the transcription ends bare.
 ///
 /// Parakeet commits a sentence's closing mark only once *following* speech
@@ -450,6 +494,11 @@ pub fn ensure_terminal_punctuation(text: &str) -> String {
         if token.contains(['@', '/']) {
             return text.to_string();
         }
+    }
+    // A spoken punctuation command already says how the sentence ends; adding a
+    // mark on top of it is what post-processing then has to reconcile.
+    if ends_with_spoken_punctuation(text) {
+        return text.to_string();
     }
 
     let sentence = match text.rfind(['.', '?', '!']) {
@@ -600,6 +649,34 @@ mod tests {
         assert_eq!(
             ensure_terminal_punctuation("Doesn\u{2019}t it work"),
             "Doesn\u{2019}t it work?"
+        );
+    }
+
+    #[test]
+    fn test_ensure_terminal_punctuation_spoken_commands() {
+        // spoken punctuation already ends the sentence: no mark stapled on top,
+        // so post-processing sees one instruction instead of two
+        assert_eq!(
+            ensure_terminal_punctuation("is that final question mark"),
+            "is that final question mark"
+        );
+        assert_eq!(
+            ensure_terminal_punctuation("ship it period"),
+            "ship it period"
+        );
+        assert_eq!(
+            ensure_terminal_punctuation("that is huge exclamation point"),
+            "that is huge exclamation point"
+        );
+        assert_eq!(
+            ensure_terminal_punctuation("here is the plan new paragraph"),
+            "here is the plan new paragraph"
+        );
+        // multi-word commands must match on both words, not just the last
+        assert_eq!(ensure_terminal_punctuation("hit the mark"), "hit the mark.");
+        assert_eq!(
+            ensure_terminal_punctuation("stand in line"),
+            "stand in line."
         );
     }
 
