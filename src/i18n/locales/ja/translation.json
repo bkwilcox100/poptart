@@ -634,7 +634,11 @@
     "portableUpdateMessage": "ポータブル版は自動的に更新できません。下のボタンからお使いのシステム向けのインストーラーをダウンロードし、実行して同じフォルダーにインストールしてください。Data フォルダー(設定、モデル、録音)はそのまま残ります。",
     "portableUpdateButton": "インストーラーをダウンロード",
     "portableUpdateBrowseMessage": "ポータブル版は自動的に更新できません。GitHub Releases からお使いのシステム向けの最新版をダウンロードし、同じフォルダーにインストールしてください。Data フォルダー(設定、モデル、録音)はそのまま残ります。",
-    "portableUpdateBrowseButton": "GitHub Releases を開く"
+    "portableUpdateBrowseButton": "GitHub Releases を開く",
+    "updateInstallFailedTitle": "アップデートのインストールに失敗しました",
+    "updateInstallFailedMessage": "Poptart はアップデートをインストールできませんでした。GitHub Releases から最新版をダウンロードし、手動でインストールしてください。",
+    "updateCheckFailedTitle": "アップデートの確認に失敗しました",
+    "updateCheckFailedMessage": "Poptart はアップデートを確認できませんでした。接続を確認して、もう一度お試しください。"
   },
   "common": {
     "loading": "読み込み中…",

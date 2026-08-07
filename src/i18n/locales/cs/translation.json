@@ -634,7 +634,11 @@
     "portableUpdateMessage": "Přenosné instalace nelze aktualizovat automaticky. Níže stáhněte instalátor pro svůj systém, spusťte jej a nainstalujte do stejné složky — vaše složka Data/ (nastavení, modely, nahrávky) zůstane na místě.",
     "portableUpdateButton": "Stáhnout instalátor",
     "portableUpdateBrowseMessage": "Přenosné instalace nelze aktualizovat automaticky. Stáhněte nejnovější verzi pro svůj systém z GitHub Releases a nainstalujte ji do stejné složky — vaše složka Data/ (nastavení, modely, nahrávky) zůstane na místě.",
-    "portableUpdateBrowseButton": "Otevřít GitHub Releases"
+    "portableUpdateBrowseButton": "Otevřít GitHub Releases",
+    "updateInstallFailedTitle": "Instalace aktualizace se nezdařila",
+    "updateInstallFailedMessage": "Poptart nedokázal aktualizaci nainstalovat. Stáhněte nejnovější verzi z GitHub Releases a nainstalujte ji ručně.",
+    "updateCheckFailedTitle": "Kontrola aktualizací se nezdařila",
+    "updateCheckFailedMessage": "Poptart nedokázal zkontrolovat aktualizace. Zkontrolujte připojení a zkuste to znovu."
   },
   "common": {
     "loading": "Načítání...",

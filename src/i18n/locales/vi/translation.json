@@ -634,7 +634,11 @@
     "portableUpdateMessage": "Bản cài đặt di động không thể cập nhật tự động. Hãy tải trình cài đặt phù hợp với hệ thống của bạn bên dưới, chạy nó và cài vào cùng thư mục — thư mục Data/ (cài đặt, mô hình, bản ghi) của bạn được giữ nguyên.",
     "portableUpdateButton": "Tải trình cài đặt",
     "portableUpdateBrowseMessage": "Bản cài đặt di động không thể cập nhật tự động. Hãy tải phiên bản mới nhất phù hợp với hệ thống của bạn từ GitHub Releases và cài vào cùng thư mục — thư mục Data/ (cài đặt, mô hình, bản ghi) của bạn được giữ nguyên.",
-    "portableUpdateBrowseButton": "Mở GitHub Releases"
+    "portableUpdateBrowseButton": "Mở GitHub Releases",
+    "updateInstallFailedTitle": "Cài đặt bản cập nhật thất bại",
+    "updateInstallFailedMessage": "Poptart không thể cài đặt bản cập nhật. Hãy tải phiên bản mới nhất từ GitHub Releases và cài đặt thủ công.",
+    "updateCheckFailedTitle": "Kiểm tra cập nhật thất bại",
+    "updateCheckFailedMessage": "Poptart không thể kiểm tra cập nhật. Hãy kiểm tra kết nối của bạn và thử lại."
   },
   "common": {
     "loading": "Đang tải...",

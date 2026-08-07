@@ -634,7 +634,11 @@
     "portableUpdateMessage": "Портативні встановлення не можна оновити автоматично. Завантажте нижче інсталятор для вашої системи, запустіть його та встановіть у ту саму теку — ваша тека Data/ (налаштування, моделі, записи) залишиться на місці.",
     "portableUpdateButton": "Завантажити інсталятор",
     "portableUpdateBrowseMessage": "Портативні встановлення не можна оновити автоматично. Завантажте найновішу версію для вашої системи зі сторінки GitHub Releases та встановіть її в ту саму теку — ваша тека Data/ (налаштування, моделі, записи) залишиться на місці.",
-    "portableUpdateBrowseButton": "Відкрити GitHub Releases"
+    "portableUpdateBrowseButton": "Відкрити GitHub Releases",
+    "updateInstallFailedTitle": "Не вдалося встановити оновлення",
+    "updateInstallFailedMessage": "Poptart не зміг встановити оновлення. Завантажте найновішу версію зі сторінки GitHub Releases і встановіть її вручну.",
+    "updateCheckFailedTitle": "Не вдалося перевірити оновлення",
+    "updateCheckFailedMessage": "Poptart не зміг перевірити наявність оновлень. Перевірте підключення та спробуйте ще раз."
   },
   "common": {
     "loading": "Завантаження...",

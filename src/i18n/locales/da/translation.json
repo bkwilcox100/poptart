@@ -634,7 +634,11 @@
     "portableUpdateMessage": "Flytbare installationer kan ikke opdateres automatisk. Download installeren til dit system nedenfor, kør den, og installer i den samme mappe — din Data/-mappe (indstillinger, modeller, optagelser) bliver bevaret.",
     "portableUpdateButton": "Download installer",
     "portableUpdateBrowseMessage": "Flytbare installationer kan ikke opdateres automatisk. Download den nyeste version til dit system fra GitHub Releases, og installer den i den samme mappe — din Data/-mappe (indstillinger, modeller, optagelser) bliver bevaret.",
-    "portableUpdateBrowseButton": "Åbn GitHub Releases"
+    "portableUpdateBrowseButton": "Åbn GitHub Releases",
+    "updateInstallFailedTitle": "Installation af opdatering mislykkedes",
+    "updateInstallFailedMessage": "Poptart kunne ikke installere opdateringen. Download den nyeste version fra GitHub Releases, og installer den manuelt.",
+    "updateCheckFailedTitle": "Kontrol for opdateringer mislykkedes",
+    "updateCheckFailedMessage": "Poptart kunne ikke tjekke for opdateringer. Tjek din forbindelse, og prøv igen."
   },
   "whatsNew": {
     "title": "Nyt i Poptart v{{version}}"

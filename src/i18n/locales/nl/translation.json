@@ -634,7 +634,11 @@
     "portableUpdateMessage": "Draagbare (portable) installaties kunnen niet automatisch worden bijgewerkt. Download hieronder het installatiebestand voor je systeem, voer het uit en installeer in dezelfde map — je Data/-map (instellingen, modellen, opnames) blijft behouden.",
     "portableUpdateButton": "Installatiebestand downloaden",
     "portableUpdateBrowseMessage": "Draagbare (portable) installaties kunnen niet automatisch worden bijgewerkt. Download de nieuwste versie voor je systeem van GitHub Releases en installeer die in dezelfde map — je Data/-map (instellingen, modellen, opnames) blijft behouden.",
-    "portableUpdateBrowseButton": "GitHub Releases openen"
+    "portableUpdateBrowseButton": "GitHub Releases openen",
+    "updateInstallFailedTitle": "Installeren van update mislukt",
+    "updateInstallFailedMessage": "Poptart kon de update niet installeren. Download de nieuwste versie van GitHub Releases en installeer die handmatig.",
+    "updateCheckFailedTitle": "Controleren op updates mislukt",
+    "updateCheckFailedMessage": "Poptart kon niet controleren op updates. Controleer je verbinding en probeer het opnieuw."
   },
   "whatsNew": {
     "title": "Nieuw in Poptart v{{version}}"

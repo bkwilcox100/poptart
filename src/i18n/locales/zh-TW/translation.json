@@ -634,7 +634,11 @@
     "portableUpdateMessage": "可攜式安裝無法自動更新。請透過下方按鈕下載適用於你的系統的安裝程式，執行後安裝到相同資料夾，你的 Data/ 資料夾（設定、模型、錄音）會保留在原處。",
     "portableUpdateButton": "下載安裝程式",
     "portableUpdateBrowseMessage": "可攜式安裝無法自動更新。請從 GitHub Releases 下載適用於你的系統的最新版本，並安裝到相同資料夾，你的 Data/ 資料夾（設定、模型、錄音）會保留在原處。",
-    "portableUpdateBrowseButton": "開啟 GitHub Releases"
+    "portableUpdateBrowseButton": "開啟 GitHub Releases",
+    "updateInstallFailedTitle": "更新安裝失敗",
+    "updateInstallFailedMessage": "Poptart 無法安裝此更新。請從 GitHub Releases 下載最新版本並手動安裝。",
+    "updateCheckFailedTitle": "檢查更新失敗",
+    "updateCheckFailedMessage": "Poptart 無法檢查更新。請檢查你的網路連線後再試一次。"
   },
   "common": {
     "loading": "載入中...",
